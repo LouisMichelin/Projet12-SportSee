@@ -1,0 +1,26 @@
+.HeaderWrapper {
+   height: 90px;
+   min-width: 1024px;
+   width: 100%;
+   background-color: black;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+.HeaderLogo {
+   height: calc(100% - 30px);
+   margin: 15px 50px 15px 30px;
+}
+.NavContainer {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+}
+.NavLink {
+   cursor: pointer;
+   color: white;
+   font-size: 24px;
+   font-weight: 500;
+}

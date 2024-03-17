@@ -1,0 +1,35 @@
+.DailyWrapper {
+   height: 320px;
+   width: 835px;
+   background-color: #fbfbfb;
+   border-radius: 5px;
+}
+
+.DailyTitle {
+   position: absolute;
+   margin-left: 20px;
+   padding-top: 15px;
+   padding-bottom: 20px;
+   color: #20253a;
+   font-size: 15px;
+   font-weight: 600;
+}
+
+.recharts-default-tooltip {
+   background-color: red;
+}
+// .recharts-legend-wrapper {
+//    position: relative;
+//    top: 10px;
+// }
+
+// .DailyBar {
+//    height: 320px;
+//    width: 835px;
+// }
+
+// .recharts-legend-wrapper {
+//    height: 50px;
+//    position: absolute;
+//    top: 10px;
+// }

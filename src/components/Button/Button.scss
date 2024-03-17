@@ -1,0 +1,14 @@
+.ButtonWrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #ffffff;
+   // margin: 10px 0px 10px 0px;
+   height: 64px;
+   width: 64px;
+   border-radius: 6px;
+   cursor: pointer;
+}
+.ButtonWrapper > img {
+   height: 32px;
+}
