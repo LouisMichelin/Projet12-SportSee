@@ -1,43 +1,32 @@
 import React, { useState, useEffect } from "react";
 import "./Welcome.scss";
+import { getMainData } from "../../services/APIservices";
 
 function Welcome({ userId }) {
-   const [data, setData] = useState(null);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
+   getMainData(12);
+   // let test = localStorage.getItem("userData");
+   // JSON.parse(test);
+   // console.log(test);
 
-   useEffect(() => {
-      fetch(`http://localhost:1337/user/${userId}`)
-         .then((response) => {
-            if (response.ok) {
-               return response.json();
-            }
-            throw response;
-         })
-         .then((data) => {
-            setData(data);
-         })
-         .catch((error) => {
-            console.error("Error fetching data : ", error);
-            setError(error);
-         })
-         .finally(() => {
-            setLoading(false);
-         });
-   }, [userId]);
-
-   if (loading) return "Loading...";
-   if (error) return "Error!";
-
-   const userData = data.data;
-   const userFirstname = userData.userInfos.firstName;
-
-   let IMPORTAGE = getprenomAPI();
-
+   const myTest123 = JSON.parse(localStorage.getItem("userData"));
+   console.log(myTest123);
+   // APIS.getMainData(12);
+   // console.log(APIS.getMainData(12));
+   // getMainData().then((data) => {
+   //    console.log(data);
+   // });
+   // getMainData(12);
+   // console.log(getMainData(12));
+   // getMainData(12);
+   // const test123 = getMainData(12).id;
+   // console.log(USER_MAIN_DATA);
    return (
       <div className="WelcomeWrapper">
          <div className="WelcomeMessage">
-            Bonjour <span style={{ color: "#FF0101" }}>{userFirstname}</span>
+            Bonjour&nbsp;
+            <span id="WelcomeName" style={{ color: "#FF0101" }}>
+               KEvin
+            </span>
          </div>
          <div className="WelcomeMessageCongrats">
             Félicitation ! Vous avez explosé vos objectifs hier &#128079;

@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Daily.scss";
-// import { Bar } from "react-chartjs-2";
+
 import {
-   // Chart as ChartJS,
-   // CategoryScale,
-   // LinearScale,
-   // BarElement,
-   // Title,
    Tooltip,
    Legend,
    ResponsiveContainer,
    BarChart,
    Bar,
-   Rectangle,
+   // Rectangle,
    ReferenceLine,
    XAxis,
    YAxis,
@@ -21,7 +16,7 @@ import {
 
 function Daily({ userId }) {
    // ---------------------------------------------------------------
-   const [data, setData] = useState(null);
+   userId.PropTypes.const[(data, setData)] = useState(null);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
    useEffect(() => {
@@ -52,7 +47,7 @@ function Daily({ userId }) {
    // ---------------------------------------------------------------
 
    // ---------------------------------------------------------------
-   // CE DATA LA ======> données fixes pour exemples
+   // CE DATA LA ======> données fixes
    // const data = [
    //    {
    //       day: 1,
@@ -71,50 +66,9 @@ function Daily({ userId }) {
    //       poids: 75,
    //       calories: 280,
    //       // amt: 75,
-   //    },
-   //    {
-   //       day: 4,
-   //       poids: 70,
-   //       calories: 200,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 5,
-   //       poids: 65,
-   //       calories: 150,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 6,
-   //       poids: 65,
-   //       calories: 300,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 7,
-   //       poids: 70,
-   //       calories: 200,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 8,
-   //       poids: 65,
-   //       calories: 150,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 9,
-   //       poids: 65,
-   //       calories: 300,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 10,
-   //       poids: 65,
-   //       calories: 300,
-   //       // amt: 75,
-   //    },
-   // ];
+   //    }
+   // ---------------------------------------------------------------
+
    const graphData = [];
    userSessions.forEach((element, index) => {
       graphData.push({
@@ -123,21 +77,6 @@ function Daily({ userId }) {
          "Calories brûlées (kCal)": element.calories,
       });
    });
-
-   // console.log("graphdata = ", graphData);
-
-   // function renderTooltip() {
-   //    return (
-   //       <div
-   //          dataKey="Poids (kg)"
-   //          data={graphData}
-   //          style={{ backgroundColor: "red", color: "#ffffff" }}
-   //       >
-   //          <div>test</div>
-   //          <div>{}</div>
-   //       </div>
-   //    );
-   // }
 
    return (
       <div className="DailyWrapper">
