@@ -1,18 +1,16 @@
-import Welcome from "../Welcome/Welcome";
 import "./Dashboard.scss";
+import Welcome from "../Welcome/Welcome";
 import Daily from "../Daily/Daily";
-// import functionGetApi from "../../service/functionGet";
-// import { useState, useEffect } from "react";
-import { getMainData } from "../../services/APIservices";
 
 function Dashboard() {
-   // getMainData(12);
    return (
       <div className="DashboardWrapper">
          <div></div>
          <Welcome />
          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div>{/* <Daily userId={12} /> */}</div>
+            <div>
+               <Daily />
+            </div>
          </div>
       </div>
    );

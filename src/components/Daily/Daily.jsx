@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./Daily.scss";
-
 import {
    Tooltip,
    Legend,
@@ -13,62 +12,17 @@ import {
    YAxis,
    CartesianGrid,
 } from "recharts";
+import { getActivityData } from "../../services/APIservices";
 
-function Daily({ userId }) {
-   // ---------------------------------------------------------------
-   userId.PropTypes.const[(data, setData)] = useState(null);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
-   useEffect(() => {
-      fetch(`http://localhost:1337/user/${userId}/activity`)
-         .then((response) => {
-            if (response.ok) {
-               return response.json();
-            }
-            throw response;
-         })
-         .then((data) => {
-            setData(data);
-            // console.log(data);
-         })
-         .catch((error) => {
-            console.error("Error fetching data : ", error);
-            setError(error);
-         })
-         .finally(() => {
-            setLoading(false);
-         });
-   }, [userId]);
-   if (loading) return "Loading...";
-   if (error) return "Error!";
-   const userData = data.data;
-   const userSessions = userData.sessions;
-   // console.log(userSessions);
-   // ---------------------------------------------------------------
+let userId = 12;
 
-   // ---------------------------------------------------------------
-   // CE DATA LA ======> données fixes
-   // const data = [
-   //    {
-   //       day: 1,
-   //       poids: 80,
-   //       calories: 240,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 2,
-   //       poids: 80,
-   //       calories: 220,
-   //       // amt: 75,
-   //    },
-   //    {
-   //       day: 3,
-   //       poids: 75,
-   //       calories: 280,
-   //       // amt: 75,
-   //    }
-   // ---------------------------------------------------------------
-
+function Daily() {
+   // Fonction FETCH() pour données de USER_ACTIVITY
+   getActivityData(userId);
+   // Récupération des DATA LOCALES
+   const activityData = JSON.parse(localStorage.getItem("activityData"));
+   const userSessions = activityData.data.sessions;
+   // PUSH de chaque SESSION
    const graphData = [];
    userSessions.forEach((element, index) => {
       graphData.push({
@@ -77,6 +31,35 @@ function Daily({ userId }) {
          "Calories brûlées (kCal)": element.calories,
       });
    });
+
+   // Customize Tooltip
+   const CustomTooltip = ({ active, payload }) => {
+      if (active && payload && payload.length) {
+         return (
+            <div
+               style={{
+                  backgroundColor: "red",
+                  width: "55px",
+                  height: "75px",
+                  color: "#ffffff",
+                  fontSize: "12px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+               }}
+            >
+               <p className="label" style={{ margin: "10px" }}>
+                  {`${payload[0].value}kg`}
+               </p>
+               <p className="label" style={{ margin: "10px" }}>
+                  {`${payload[1].value}Kcal`}
+               </p>
+            </div>
+         );
+      }
+      return null;
+   };
 
    return (
       <div className="DailyWrapper">
@@ -112,9 +95,9 @@ function Daily({ userId }) {
                      // dataKey="Poids (kg)"
                   />
                   <Tooltip
-                     contentStyle={{ backgroundColor: "red" }}
-                     itemStyle={{ color: "#ffffff" }}
-                     // content={renderTooltip()}
+                     // contentStyle={{ backgroundColor: "red" }}
+                     itemStyle={{ backgroundColor: "red", color: "#ffffff" }}
+                     content={CustomTooltip}
                   />
                   <Bar
                      dataKey="Poids (kg)"
