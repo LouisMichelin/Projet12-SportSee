@@ -5,10 +5,8 @@ import { getMainData } from "../../services/APIservices";
 let userId = 12;
 
 function Welcome() {
-   // Fonction FETCH() pour données de USER_MAIN_DATA
-   getMainData(userId);
-   // Récupération des DATA LOCALES
-   const mainData = JSON.parse(localStorage.getItem("mainData"));
+   getMainData(userId); // Fonction FETCH() pour données de USER_MAIN_DATA
+   const mainData = JSON.parse(localStorage.getItem("mainData")); // Récupération des DATA LOCALES
    const firstName = mainData.data.userInfos.firstName;
 
    return (

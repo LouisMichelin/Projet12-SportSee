@@ -6,6 +6,8 @@ import {
    ResponsiveContainer,
    BarChart,
    Bar,
+   // Line,
+   // LineChart,
    // Rectangle,
    ReferenceLine,
    XAxis,
@@ -17,22 +19,19 @@ import { getActivityData } from "../../services/APIservices";
 let userId = 12;
 
 function Daily() {
-   // Fonction FETCH() pour données de USER_ACTIVITY
-   getActivityData(userId);
-   // Récupération des DATA LOCALES
-   const activityData = JSON.parse(localStorage.getItem("activityData"));
+   getActivityData(userId); // Fonction FETCH() pour données de USER_ACTIVITY
+   const activityData = JSON.parse(localStorage.getItem("activityData")); // Récupération des DATA LOCALES
    const userSessions = activityData.data.sessions;
-   // PUSH de chaque SESSION
-   const graphData = [];
+   const graphData = []; // PUSH de chaque SESSION dans graphData[]
    userSessions.forEach((element, index) => {
       graphData.push({
          day: index,
-         "Poids (kg)": element.kilogram,
-         "Calories brûlées (kCal)": element.calories,
+         poids: element.kilogram,
+         calories: element.calories,
       });
    });
 
-   // Customize Tooltip
+   // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
       if (active && payload && payload.length) {
          return (
@@ -61,6 +60,28 @@ function Daily() {
       return null;
    };
 
+   // CUSTOMIZED LEGEND
+   const RenderCustomizedLegend = ({ dataKey, active, payLoad }) => {
+      return (
+         <div className="LegendWrapper">
+            <div className="LegendPoids">
+               <div
+                  className="LegendCircle"
+                  style={{ backgroundColor: "black" }}
+               ></div>
+               <div>Poids (kg)</div>
+            </div>
+            <div className="LegendCalories">
+               <div
+                  className="LegendCircle"
+                  style={{ backgroundColor: "red" }}
+               ></div>
+               <div>Calories brûlées (kCal)</div>
+            </div>
+         </div>
+      );
+   };
+
    return (
       <div className="DailyWrapper">
          <>
@@ -78,12 +99,16 @@ function Daily() {
                   }}
                >
                   <Legend
-                     margin="10%"
-                     layout="horizontal"
+                     // margin="10%"
+                     // layout="horizontal"
                      verticalAlign="top"
-                     align="right"
-                     height={50}
+                     // align="right"
+                     // height={50}
+                     iconType="circle"
+                     // wrapperStyle={{ color: "green" }}
+                     content={RenderCustomizedLegend}
                   />
+
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <ReferenceLine x="0" />
                   <XAxis dataKey="day" />
@@ -92,31 +117,39 @@ function Daily() {
                      type="number"
                      domain={[0, "auto"]}
                      interval={1}
-                     // dataKey="Poids (kg)"
                   />
-                  <Tooltip
-                     // contentStyle={{ backgroundColor: "red" }}
-                     itemStyle={{ backgroundColor: "red", color: "#ffffff" }}
-                     content={CustomTooltip}
-                  />
+                  <Tooltip content={CustomTooltip} />
                   <Bar
-                     dataKey="Poids (kg)"
+                     color="#74798c"
+                     name="Poids (kg)"
+                     dataKey="poids"
                      fill="black"
                      barSize={10}
                      radius={[4.5, 4.5, 0, 0]}
                      paddingRight={5}
                      scaling={1}
-                     // activeBar={<Rectangle fill="grey" stroke="blue" />}
                   />
                   <Bar
-                     dataKey="Calories brûlées (kCal)"
+                     color="#74798c"
+                     name="Calories brûlées (kCal)"
+                     dataKey="calories"
                      fill="red"
                      barSize={10}
                      radius={[4.5, 4.5, 0, 0]}
                      scaling={0.5}
-
-                     // activeBar={<Rectangle fill="orange" stroke="purple" />}
                   />
+                  {/* <Line
+                     type="monotone"
+                     dataKey="poids"
+                     stroke="#8884d8"
+                     color="cyan"
+                  />
+                  <Line
+                     type="calories"
+                     dataKey="uv"
+                     stroke="#82ca9d"
+                     color="cyan"
+                  /> */}
                </BarChart>
             </ResponsiveContainer>
          </>
