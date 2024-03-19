@@ -1,5 +1,8 @@
 .DashboardWrapper {
    width: 100%;
    background-color: #ffffff;
-   padding: 70px 90px 90px 100px;
+   margin: 35px 0px 0px 50px;
+   @media (min-width: 1200px) {
+      margin: 70px 0px 0px 100px;
+   }
 }

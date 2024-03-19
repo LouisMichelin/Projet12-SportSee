@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import "./Daily.scss";
+import { scaleLog, scaleSymlog } from "d3-scale";
 import {
    Tooltip,
    Legend,
    ResponsiveContainer,
    BarChart,
    Bar,
+   // CartesianAxis,
    // Line,
-   // LineChart,
+   LineChart,
    // Rectangle,
    ReferenceLine,
    XAxis,
@@ -61,7 +63,7 @@ function Daily() {
    };
 
    // CUSTOMIZED LEGEND
-   const RenderCustomizedLegend = ({ dataKey, active, payLoad }) => {
+   const RenderCustomizedLegend = () => {
       return (
          <div className="LegendWrapper">
             <div className="LegendPoids">
@@ -82,6 +84,25 @@ function Daily() {
       );
    };
 
+   const CustomizedAxisTickX = ({ x, y, stroke, payload }) => {
+      return (
+         <g transform={`translate(${x},${y})`}>
+            <text x={0} y={0} dy={30} fill="#9B9EAC">
+               {payload.value}
+            </text>
+         </g>
+      );
+   };
+   const CustomizedAxisTickY = ({ x, y, stroke, payload }) => {
+      return (
+         <g transform={`translate(${x},${y})`}>
+            <text x={0} y={0} dy={5} dx={30} textAnchor="center" fill="#9B9EAC">
+               {payload.value}
+            </text>
+         </g>
+      );
+   };
+
    return (
       <div className="DailyWrapper">
          <>
@@ -94,39 +115,54 @@ function Daily() {
                   margin={{
                      top: 30,
                      right: 10,
-                     left: 40,
+                     left: 50,
                      bottom: 5,
                   }}
+                  // margin={0}
+                  barSize={10}
+                  maxBarSize={5}
+                  barGap={8}
                >
                   <Legend
-                     // margin="10%"
-                     // layout="horizontal"
                      verticalAlign="top"
-                     // align="right"
-                     // height={50}
-                     iconType="circle"
-                     // wrapperStyle={{ color: "green" }}
+                     // iconType="circle"
                      content={RenderCustomizedLegend}
                   />
-
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <CartesianGrid strokeDasharray="2" vertical={false} />
                   <ReferenceLine x="0" />
-                  <XAxis dataKey="day" />
+                  <XAxis
+                     dataKey="day"
+                     height={60}
+                     width={50}
+                     tickLine={false}
+                     axisLine={{ stroke: "#d1d2d6" }}
+                     tick={CustomizedAxisTickX}
+                     padding={{ left: -50, right: -50 }}
+                  />
                   <YAxis
+                     dataKey={"calories"}
+                     tick={CustomizedAxisTickY}
                      orientation="right"
                      type="number"
                      domain={[0, "auto"]}
                      interval={1}
+                     axisLine={false}
+                     tickLine={false}
+                     width={90}
                   />
-                  <Tooltip content={CustomTooltip} />
+                  <Tooltip
+                     content={CustomTooltip}
+                     cursor={{ fill: "#C4C4C480" }}
+                     width={20}
+                  />
                   <Bar
                      color="#74798c"
                      name="Poids (kg)"
                      dataKey="poids"
                      fill="black"
-                     barSize={10}
+                     // barSize={10}
                      radius={[4.5, 4.5, 0, 0]}
-                     paddingRight={5}
+                     // paddingRight={50}
                      scaling={1}
                   />
                   <Bar
@@ -134,22 +170,10 @@ function Daily() {
                      name="Calories brûlées (kCal)"
                      dataKey="calories"
                      fill="red"
-                     barSize={10}
+                     // barSize={10}
                      radius={[4.5, 4.5, 0, 0]}
                      scaling={0.5}
                   />
-                  {/* <Line
-                     type="monotone"
-                     dataKey="poids"
-                     stroke="#8884d8"
-                     color="cyan"
-                  />
-                  <Line
-                     type="calories"
-                     dataKey="uv"
-                     stroke="#82ca9d"
-                     color="cyan"
-                  /> */}
                </BarChart>
             </ResponsiveContainer>
          </>

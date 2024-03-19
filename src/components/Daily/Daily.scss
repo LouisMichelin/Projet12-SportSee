@@ -1,6 +1,8 @@
 .DailyWrapper {
    height: 320px;
-   width: 835px;
+   width: 800px;
+   // max-width: 835px;
+   // width: auto;
    background-color: #fbfbfb;
    border-radius: 5px;
 }
@@ -22,8 +24,8 @@
    justify-content: end;
    width: 100%;
    position: relative;
-   right: 50px;
-   margin-bottom: 40px;
+   right: 25px;
+   margin-bottom: 50px;
 }
 .LegendPoids,
 .LegendCalories {
