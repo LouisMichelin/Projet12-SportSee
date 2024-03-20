@@ -1,8 +1,11 @@
 .DailyWrapper {
    height: 320px;
-   width: 735px;
+   width: 835px;
    background-color: #fbfbfb;
    border-radius: 5px;
+   // @media (min-width: 1101px) {
+   //    width: 835px;
+   // }
 }
 .DailyTitle {
    position: absolute;

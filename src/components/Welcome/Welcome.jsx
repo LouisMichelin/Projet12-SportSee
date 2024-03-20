@@ -1,5 +1,4 @@
 import "./Welcome.scss";
-import React, { useState, useEffect } from "react";
 import { getMainData } from "../../services/APIservices";
 
 let userId = 12;

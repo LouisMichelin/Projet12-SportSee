@@ -1,21 +1,25 @@
 import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
 import Daily from "../Daily/Daily.jsx";
+import Sessions from "../Sessions/Sessions.jsx";
+import Performances from "../Performances/Performances.jsx";
+import Score from "../Score/Score.jsx";
 
 function Dashboard() {
    return (
       <div className="DashboardWrapper">
          <Welcome />
-         <div style={{ display: "flex", flexDirection: "row" }}>
+         <div className="DashboardSecondWrapper">
             <div style={{ display: "flex", flexDirection: "column" }}>
                <Daily />
-               <div style={{ display: "flex", flexDirection: "row" }}>
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
+               <div className="DashboardDetails">
+                  <Sessions />
+                  <Performances />
+                  <Score />
                </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className="DashboardScientificValues">
+               {/* <div>CECI SERA UN .MAP()</div> */}
                <div>1</div>
                <div>2</div>
                <div>3</div>
