@@ -58,9 +58,8 @@ export function getAverageData(elementID) {
          throw res;
       })
       .then((data) => {
-         console.log(data);
-         let averageData = JSON.stringify(data);
-         sessionStorage.setItem("averageData", averageData);
+         // console.log(data);
+         sessionStorage.setItem("averageData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -81,9 +80,8 @@ export function getPerformanceData(elementID) {
          throw res;
       })
       .then((data) => {
-         console.log(data);
-         let performanceData = JSON.stringify(data);
-         sessionStorage.setItem("performanceData", performanceData);
+         // console.log(data);
+         sessionStorage.setItem("performanceData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
