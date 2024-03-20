@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
 import "./Welcome.scss";
+import React, { useState, useEffect } from "react";
 import { getMainData } from "../../services/APIservices";
 
 let userId = 12;
 
 function Welcome() {
-   const mainData = JSON.parse(sessionStorage.getItem("mainData")); // Récupération des DATA LOCALES
-   const firstName = mainData.data.userInfos.firstName;
-
-   if (
-      sessionStorage.getItem("mainData") == null ||
-      firstName != mainData.data.userInfos.firstName
-   ) {
+   // Si la sessionStorage est null alors on appelle la fonction API getMainData()
+   if (sessionStorage.getItem("mainData") == null) {
       getMainData(userId);
-      console.log(sessionStorage);
    }
-
-   // getMainData(userId); // Fonction FETCH() pour données de USER_MAIN_DATA
-   // const mainData = JSON.parse(sessionStorage.getItem("mainData")); // Récupération des DATA LOCALES
-   // const firstName = mainData.data.userInfos.firstName;
+   const mainData = JSON.parse(sessionStorage.getItem("mainData"));
+   if (mainData.data.id != userId) {
+      getMainData(userId);
+   }
+   // Utilisation des Data "fetched"
+   const firstName = mainData.data.userInfos.firstName;
 
    return (
       <div className="WelcomeWrapper">

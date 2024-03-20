@@ -15,12 +15,21 @@ import { getActivityData } from "../../services/APIservices";
 let userId = 12;
 
 function Daily() {
-   getActivityData(userId); // Fonction FETCH() pour données de USER_ACTIVITY
-   const activityData = JSON.parse(localStorage.getItem("activityData")); // Récupération des DATA LOCALES
+   // Si la sessionStorage est null alors on appelle la fonction API getActivityData()
+   if (sessionStorage.getItem("activityData") == null) {
+      getActivityData(userId);
+   }
+   const activityData = JSON.parse(sessionStorage.getItem("activityData"));
+   // console.log(activityData);
+   if (activityData.data.id != userId) {
+      getActivityData(userId);
+   }
+   // Utilisation des Data "fetched"
    const userSessions = activityData.data.sessions;
-   const graphData = []; // PUSH de chaque SESSION dans graphData[]
+   const graphData = [];
    userSessions.forEach((element, index) => {
       graphData.push({
+         // PUSH de chaque SESSION dans graphData[]
          day: [index + 1],
          poids: element.kilogram,
          calories: element.calories,

@@ -1,6 +1,6 @@
 import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
-import Daily from "../Daily/Daily";
+import Daily from "../Daily/Daily.jsx";
 
 function Dashboard() {
    return (

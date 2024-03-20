@@ -37,8 +37,7 @@ export function getActivityData(elementID) {
       })
       .then((data) => {
          // console.log(data);
-         let activityData = JSON.stringify(data);
-         localStorage.setItem("activityData", activityData);
+         sessionStorage.setItem("activityData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -61,7 +60,7 @@ export function getAverageData(elementID) {
       .then((data) => {
          console.log(data);
          let averageData = JSON.stringify(data);
-         localStorage.setItem("averageData", averageData);
+         sessionStorage.setItem("averageData", averageData);
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -84,7 +83,7 @@ export function getPerformanceData(elementID) {
       .then((data) => {
          console.log(data);
          let performanceData = JSON.stringify(data);
-         localStorage.setItem("performanceData", performanceData);
+         sessionStorage.setItem("performanceData", performanceData);
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
