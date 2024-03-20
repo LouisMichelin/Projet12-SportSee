@@ -15,8 +15,7 @@ export function getMainData(elementID) {
       })
       .then((data) => {
          // console.log(data);
-         let mainData = JSON.stringify(data);
-         localStorage.setItem("mainData", mainData);
+         sessionStorage.setItem("mainData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);

@@ -1,16 +1,10 @@
-import { useState, useEffect } from "react";
 import "./Daily.scss";
-import { scaleLog, scaleSymlog } from "d3-scale";
 import {
    Tooltip,
    Legend,
    ResponsiveContainer,
    BarChart,
    Bar,
-   // CartesianAxis,
-   // Line,
-   LineChart,
-   // Rectangle,
    ReferenceLine,
    XAxis,
    YAxis,
@@ -27,7 +21,7 @@ function Daily() {
    const graphData = []; // PUSH de chaque SESSION dans graphData[]
    userSessions.forEach((element, index) => {
       graphData.push({
-         day: index,
+         day: [index + 1],
          poids: element.kilogram,
          calories: element.calories,
       });
@@ -61,7 +55,6 @@ function Daily() {
       }
       return null;
    };
-
    // CUSTOMIZED LEGEND
    const RenderCustomizedLegend = () => {
       return (
@@ -83,20 +76,34 @@ function Daily() {
          </div>
       );
    };
-
-   const CustomizedAxisTickX = ({ x, y, stroke, payload }) => {
+   // CUSTOMIZED AXE X
+   const CustomizedAxisTickX = ({ x, y, payload }) => {
       return (
          <g transform={`translate(${x},${y})`}>
-            <text x={0} y={0} dy={30} fill="#9B9EAC">
+            <text
+               x={0}
+               y={0}
+               dy={25}
+               fill="#9B9EAC"
+               style={{ fontWeight: "600", fontSize: "14px" }}
+            >
                {payload.value}
             </text>
          </g>
       );
    };
-   const CustomizedAxisTickY = ({ x, y, stroke, payload }) => {
+   // CUSTOMIZED AXE Y
+   const CustomizedAxisTickY = ({ x, y, payload }) => {
       return (
          <g transform={`translate(${x},${y})`}>
-            <text x={0} y={0} dy={5} dx={30} textAnchor="center" fill="#9B9EAC">
+            <text
+               x={0}
+               y={0}
+               dy={5}
+               dx={30}
+               fill="#9B9EAC"
+               style={{ fontWeight: "600", fontSize: "14px" }}
+            >
                {payload.value}
             </text>
          </g>
@@ -105,78 +112,62 @@ function Daily() {
 
    return (
       <div className="DailyWrapper">
-         <>
-            <div className="DailyTitle">Activité quotidienne</div>
-            <ResponsiveContainer width="100%" height="100%">
-               <BarChart
-                  width={700}
-                  height={300}
-                  data={graphData}
-                  margin={{
-                     top: 30,
-                     right: 10,
-                     left: 50,
-                     bottom: 5,
-                  }}
-                  // margin={0}
-                  barSize={10}
-                  maxBarSize={5}
-                  barGap={8}
-               >
-                  <Legend
-                     verticalAlign="top"
-                     // iconType="circle"
-                     content={RenderCustomizedLegend}
-                  />
-                  <CartesianGrid strokeDasharray="2" vertical={false} />
-                  <ReferenceLine x="0" />
-                  <XAxis
-                     dataKey="day"
-                     height={60}
-                     width={50}
-                     tickLine={false}
-                     axisLine={{ stroke: "#d1d2d6" }}
-                     tick={CustomizedAxisTickX}
-                     padding={{ left: -50, right: -50 }}
-                  />
-                  <YAxis
-                     dataKey={"calories"}
-                     tick={CustomizedAxisTickY}
-                     orientation="right"
-                     type="number"
-                     domain={[0, "auto"]}
-                     interval={1}
-                     axisLine={false}
-                     tickLine={false}
-                     width={90}
-                  />
-                  <Tooltip
-                     content={CustomTooltip}
-                     cursor={{ fill: "#C4C4C480" }}
-                     width={20}
-                  />
-                  <Bar
-                     color="#74798c"
-                     name="Poids (kg)"
-                     dataKey="poids"
-                     fill="black"
-                     // barSize={10}
-                     radius={[4.5, 4.5, 0, 0]}
-                     // paddingRight={50}
-                     scaling={1}
-                  />
-                  <Bar
-                     color="#74798c"
-                     name="Calories brûlées (kCal)"
-                     dataKey="calories"
-                     fill="red"
-                     // barSize={10}
-                     radius={[4.5, 4.5, 0, 0]}
-                     scaling={0.5}
-                  />
-               </BarChart>
-            </ResponsiveContainer>
-         </>
+         <div className="DailyTitle">Activité quotidienne</div>
+         <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+               data={graphData}
+               margin={{
+                  top: 30,
+                  right: 10,
+                  left: 50,
+                  bottom: 5,
+               }}
+               barSize={10}
+               barGap={8}
+            >
+               <Legend verticalAlign="top" content={RenderCustomizedLegend} />
+               <CartesianGrid strokeDasharray="2" vertical={false} />
+               <ReferenceLine x="0" />
+               <XAxis
+                  dataKey="day"
+                  height={60}
+                  width={50}
+                  tickLine={false}
+                  axisLine={{ stroke: "#d1d2d6" }}
+                  tick={CustomizedAxisTickX}
+                  // padding={{ left: -40, right: -40 }}
+               />
+               <YAxis
+                  dataKey={"calories"}
+                  tick={CustomizedAxisTickY}
+                  orientation="right"
+                  type="number"
+                  domain={[0, "auto"]}
+                  interval={1}
+                  axisLine={false}
+                  tickLine={false}
+                  width={90}
+               />
+               <Tooltip
+                  content={CustomTooltip}
+                  cursor={{ fill: "#C4C4C480" }}
+               />
+               <Bar
+                  color="#74798c"
+                  name="Poids (kg)"
+                  dataKey="poids"
+                  fill="black"
+                  radius={[4.5, 4.5, 0, 0]}
+               />
+               <Bar
+                  color="#74798c"
+                  name="Calories brûlées (kCal)"
+                  dataKey="calories"
+                  fill="red"
+                  radius={[4.5, 4.5, 0, 0]}
+               />
+            </BarChart>
+         </ResponsiveContainer>
       </div>
    );
 }
