@@ -38,11 +38,15 @@ function Sessions() {
       return (
          <g transform={`translate(${x},${y})`}>
             <text
-               x={0}
+               x={-5}
                y={0}
                dy={25}
+               // dx={10}
                fill="#ffffff"
-               style={{ fontSize: "14px" }}
+               style={{
+                  fontSize: "14px",
+                  opacity: "0.66",
+               }}
             >
                {payload.value}
             </text>
@@ -76,12 +80,12 @@ function Sessions() {
                // width={260}
                // height={240}
                data={sessionsArray}
-               // margin={{
-               //    top: 5,
-               //    right: 10,
-               //    left: 10,
-               //    bottom: 5,
-               // }}
+               margin={{
+                  top: 5,
+                  right: 15,
+                  left: 15,
+                  bottom: 5,
+               }}
             >
                {/* <CartesianGrid strokeDasharray="3 3" /> */}
                <XAxis
@@ -99,6 +103,11 @@ function Sessions() {
                   dataKey="length"
                   stroke="#ffffff"
                   activeDot={{ r: 8 }}
+                  style={{
+                     // fontSize: "14px",
+                     opacity: "0.66",
+                  }}
+                  dot={null}
                />
             </LineChart>
          </ResponsiveContainer>
