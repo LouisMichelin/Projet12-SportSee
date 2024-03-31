@@ -11,11 +11,11 @@ function Dashboard() {
          <Welcome />
          <div className="DashboardSecondWrapper">
             <div style={{ display: "flex", flexDirection: "column" }}>
-               <Daily />
+               {/* <Daily /> */}
                <div className="DashboardDetails">
-                  <Sessions />
-                  <Performances />
-                  <Score />
+                  {/* <Sessions /> */}
+                  {/* <Performances /> */}
+                  {/* <Score /> */}
                </div>
             </div>
             <div className="DashboardScientificValues">

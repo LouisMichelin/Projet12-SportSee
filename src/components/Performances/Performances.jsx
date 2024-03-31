@@ -37,13 +37,13 @@ const data = [
       fullMark: 150,
    },
    {
-      subject: "Physics",
+      subject: "Energie",
       A: 85,
       B: 90,
       fullMark: 150,
    },
    {
-      subject: "History",
+      subject: "Cardio",
       A: 65,
       B: 85,
       fullMark: 150,
@@ -68,7 +68,8 @@ function Performances() {
       <div className="PerformancesWrapper">
          <ResponsiveContainer width="100%" height="100%">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-               <PolarGrid innerRadius={0} />
+               <PolarGrid innerRadius={0} radialLines={false} />
+
                <PolarAngleAxis
                   dataKey="subject"
                   // axisLine="false"

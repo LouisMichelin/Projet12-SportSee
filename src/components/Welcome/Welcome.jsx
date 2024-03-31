@@ -1,19 +1,27 @@
 import "./Welcome.scss";
 import { getMainData } from "../../services/APIservices";
 
-let userId = 12;
+let userIdKarl = 12;
+let userIdCecilia = 18;
 
 function Welcome() {
-   // Si la sessionStorage est null alors on appelle la fonction API getMainData()
-   if (sessionStorage.getItem("mainData") == null) {
-      getMainData(userId);
+   // Si sessionStorage est vide, alors on appelle la fonction API avec l'ID de Cecilia;
+   if (sessionStorage.getItem("profile") == null) {
+      sessionStorage.setItem("profile", userIdCecilia);
    }
-   const mainData = JSON.parse(sessionStorage.getItem("mainData"));
-   if (mainData.data.id != userId) {
-      getMainData(userId);
+   // Après usage de la fonction API, on informe que "dataAPI" a été utilisé (donc TRUE);
+   if (sessionStorage.getItem("dataAPI") == null) {
+      sessionStorage.setItem("dataAPI", true);
    }
-   // Utilisation des Data "fetched"
+   // "profile" est l'ID de l'utilisateur;
+   let profile = sessionStorage.getItem("profile");
+   // Usage de getMainData() avec l'ID de l'utilisateur;
+   getMainData(profile);
+   // Import des DATA depuis sessionStorage;
+   let mainData = JSON.parse(sessionStorage.mainData);
+   // Puis définition du "firstName" de l'utilisateur;
    const firstName = mainData.data.userInfos.firstName;
+   console.log(firstName);
 
    return (
       <div className="WelcomeWrapper">
