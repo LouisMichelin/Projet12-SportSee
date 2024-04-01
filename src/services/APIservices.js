@@ -1,26 +1,21 @@
-// import { fs } from "fs";
-const path = "./src/data/dashboard-master/app/data/data.json";
-// import { writeFile } from "fs";
-const fs = require("fs");
-// const test = fs.readFileSync(path);
-// console.log(JSON.parse(test));
-
-// const config = { ip: "192.0.2.1", port: 3000 };
-
-// try {
-//    writeFile(path, JSON.stringify(config, null, 2), "utf8");
-//    console.log("Data successfully saved to disk");
-// } catch (error) {
-//    console.log("An error has occurred ", error);
-// }
-
-// fetch(path).then((response) =>
-//    response.json().then((json) => console.log(json))
-// );
-// console.log(path);
-
+// fetch(path, {
+//    method: "POST",
+//    body: JSON.stringify({
+//       userId: 1,
+//       title: "Fix my bugs",
+//       completed: false,
+//    }),
+//    headers: {
+//       "Content-type": "application/json; charset=UTF-8",
+//    },
+// })
+//    .then((response) => response.json())
+//    .then((json) => console.log(json));
 // let mainDataAPI = sessionStorage.getItem("mainData");
 // console.log("maindataAPI", JSON.parse(mainDataAPI));
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 export function getMainDataAPI(elementID) {
    fetch(`http://localhost:1337/user/${elementID}`, {
@@ -111,6 +106,7 @@ export function getPerformanceDataAPI(elementID) {
 }
 
 ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 export function getMainDataMocked(elementID) {
    // Récupérer les données MAIN DATA depuis le fichier DATA.JSON
@@ -120,6 +116,7 @@ export function getActivityDataMocked(elementID) {}
 export function getAverageDataMocked(elementID) {}
 export function getPerformanceDataMocked(elementID) {}
 
+/////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 
 export function getMainData(elementID) {
