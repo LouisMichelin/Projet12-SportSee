@@ -1,5 +1,6 @@
-// FETCH() => Potentiellement utile pour les Data
-//
+//////////////////////////////////////////////////////////
+//        FETCH() MODEL SI BESOIN POUR LES DATA         //
+//////////////////////////////////////////////////////////
 // fetch(path, {
 //    method: "POST",
 //    body: JSON.stringify({
@@ -15,10 +16,15 @@
 //    .then((json) => console.log(json));
 // let mainDataAPI = sessionStorage.getItem("mainData");
 // console.log("maindataAPI", JSON.parse(mainDataAPI));
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////
+//
+//
+//
+//
+//
+//////////////////////////////////////////////////////////
+//                     API FUNCTIONS                    //
+//////////////////////////////////////////////////////////
 export function getMainDataAPI(elementID) {
    fetch(`http://localhost:1337/user/${elementID}`, {
       method: "GET",
@@ -40,7 +46,6 @@ export function getMainDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-
 export function getActivityDataAPI(elementID) {
    fetch(`http://localhost:1337/user/${elementID}/activity`, {
       method: "GET",
@@ -62,7 +67,6 @@ export function getActivityDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-
 export function getAverageDataAPI(elementID) {
    fetch(`http://localhost:1337/user/${elementID}/average-sessions`, {
       method: "GET",
@@ -84,7 +88,6 @@ export function getAverageDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-
 export function getPerformanceDataAPI(elementID) {
    fetch(`http://localhost:1337/user/${elementID}/performance`, {
       method: "GET",
@@ -106,10 +109,14 @@ export function getPerformanceDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
+//
+//
+//
+//
+//
+//////////////////////////////////////////////////////////
+//                     MOCKED FUNCTIONS                 //
+//////////////////////////////////////////////////////////
 export function getMainDataMocked(elementID) {
    // Récupérer les données MAIN DATA depuis le fichier DATA.JSON
    // que j'aurais créé
@@ -117,10 +124,14 @@ export function getMainDataMocked(elementID) {
 export function getActivityDataMocked(elementID) {}
 export function getAverageDataMocked(elementID) {}
 export function getPerformanceDataMocked(elementID) {}
-
-/////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////
-
+//
+//
+//
+//
+//
+//////////////////////////////////////////////////////////
+//                     MAIN FUNCTIONS                   //
+//////////////////////////////////////////////////////////
 export function getMainData(elementID) {
    // CHECK VERIFICATION DU REGLAGE DE L'APP :
    // IF DATA MOCKED ? ALORS DATA API CALLED : DATA API

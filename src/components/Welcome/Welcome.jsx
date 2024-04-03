@@ -1,5 +1,13 @@
 import "./Welcome.scss";
 import { getMainData } from "../../services/APIservices";
+import MonJSON from "../../data/dashboard-master/app/data/data.json";
+console.log(MonJSON);
+console.log("------------------------");
+console.log(MonJSON[0].USER_MAIN_DATA);
+console.log(MonJSON[1].USER_ACTIVITY);
+console.log(MonJSON[2].USER_AVERAGE_SESSIONS);
+console.log(MonJSON[3].USER_PERFORMANCE);
+console.log("------------------------");
 
 let userIdKarl = 12;
 let userIdCecilia = 18;

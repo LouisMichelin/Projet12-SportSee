@@ -63,15 +63,21 @@ async function writeTowardsFile(fileName, data) {
    }
 }
 // MIXED_USER_DATAS en 1 constante :
+// const mixedUserData = [
+//    USER_MAIN_DATA,
+//    USER_ACTIVITY,
+//    USER_AVERAGE_SESSIONS,
+//    USER_PERFORMANCE,
+// ];
 const mixedUserData = [
-   USER_MAIN_DATA,
-   USER_ACTIVITY,
-   USER_AVERAGE_SESSIONS,
-   USER_PERFORMANCE,
+   { USER_MAIN_DATA: USER_MAIN_DATA },
+   { USER_ACTIVITY: USER_ACTIVITY },
+   { USER_AVERAGE_SESSIONS: USER_AVERAGE_SESSIONS },
+   { USER_PERFORMANCE: USER_PERFORMANCE },
 ];
 // Ecriture des MIXED_USER_DATAS dans le fichier .JSON
 writeTowardsFile(pathJSON, JSON.stringify(mixedUserData, null, 2));
-
+// console.log(USER_MAIN_DATA);
 /*
  *if (
  *   (USER_MAIN_DATA[0].id &&
