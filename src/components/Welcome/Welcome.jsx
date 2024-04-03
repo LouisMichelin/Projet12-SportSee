@@ -1,5 +1,6 @@
 import "./Welcome.scss";
 import { getMainData } from "../../services/APIservices";
+
 import MonJSON from "../../data/dashboard-master/app/data/data.json";
 console.log(MonJSON);
 console.log("------------------------");
@@ -21,12 +22,17 @@ function Welcome() {
    if (sessionStorage.getItem("dataAPI") == null) {
       sessionStorage.setItem("dataAPI", true);
    }
+
    // "profile" est l'ID de l'utilisateur;
    let profile = sessionStorage.getItem("profile");
+
    // Usage de getMainData() avec l'ID de l'utilisateur;
    getMainData(profile);
+
    // Import des DATA depuis sessionStorage;
    let mainData = JSON.parse(sessionStorage.mainData);
+   console.log(mainData);
+
    // Puis définition du "firstName" de l'utilisateur;
    const firstName = mainData.data.userInfos.firstName;
    console.log(firstName);
