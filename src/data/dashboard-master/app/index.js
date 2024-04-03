@@ -50,8 +50,6 @@ const {
 // -------------------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////////////
 // 4: ECRITURE DU FICHIER .JSON (OK)
-const content = `"Salut beauté 123"`;
-const content2 = `"Yo les Noobs ! :-)"`;
 const { writeFile } = require("fs/promises"); // NODE: WriteFile() to edit .JSON
 // Function pour éditer le fichier .JSON (flag "w" => overwrite, "a+" => add content)
 async function writeTowardsFile(fileName, data) {

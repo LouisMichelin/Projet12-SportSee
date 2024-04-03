@@ -1,23 +1,17 @@
-.ProfilesWrapper {
-   // margin-top: 50px;
-}
-
 .ProfilesWrapper:hover > .ProfilesHiddenMenu {
    display: block;
 }
-
 .ProfilesHiddenMenu {
-   // display: none;
+   display: none;
    position: absolute;
    justify-content: center;
-   padding-top: 30px;
-   height: 200px;
-   width: 100px;
+   padding: 10px;
+   height: auto;
+   width: auto;
    // margin-top: 50px;
    flex-direction: column;
    background-color: red;
 }
-
-// .ProfilesHidden {
-
-// }
+.ProfilesHidden {
+   padding-top: 10px;
+}
