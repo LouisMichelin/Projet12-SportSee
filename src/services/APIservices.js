@@ -19,9 +19,6 @@
 //////////////////////////////////////////////////////////
 //
 //
-//
-//
-//
 //////////////////////////////////////////////////////////
 //                     API FUNCTIONS                    //
 //////////////////////////////////////////////////////////
@@ -40,7 +37,7 @@ export function getMainDataAPI(elementID) {
       })
       .then((data) => {
          // console.log(data);
-         sessionStorage.setItem("mainData", JSON.stringify(data));
+         sessionStorage.setItem("userMainData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -61,7 +58,7 @@ export function getActivityDataAPI(elementID) {
       })
       .then((data) => {
          // console.log(data);
-         sessionStorage.setItem("activityData", JSON.stringify(data));
+         sessionStorage.setItem("userActivityData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -82,7 +79,7 @@ export function getAverageDataAPI(elementID) {
       })
       .then((data) => {
          // console.log(data);
-         sessionStorage.setItem("averageData", JSON.stringify(data));
+         sessionStorage.setItem("userAverageData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -103,15 +100,12 @@ export function getPerformanceDataAPI(elementID) {
       })
       .then((data) => {
          // console.log(data);
-         sessionStorage.setItem("performanceData", JSON.stringify(data));
+         sessionStorage.setItem("userPerformanceData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
       });
 }
-//
-//
-//
 //
 //
 //////////////////////////////////////////////////////////
@@ -126,9 +120,6 @@ export function getAverageDataMocked(elementID) {}
 export function getPerformanceDataMocked(elementID) {}
 //
 //
-//
-//
-//
 //////////////////////////////////////////////////////////
 //                     MAIN FUNCTIONS                   //
 //////////////////////////////////////////////////////////
@@ -140,7 +131,7 @@ export function getMainData(elementID) {
    // sessionStorage.setItem("profile", elementID);
 
    // Si sessionStorage est vide, alors on appelle la fonction API getMainDataAPI()
-   if (sessionStorage.getItem("mainData") == null) {
+   if (sessionStorage.getItem("userMainData") == null) {
       getMainDataAPI(elementID);
    }
    // ELSE : on utilise les DATA du fichier JSON

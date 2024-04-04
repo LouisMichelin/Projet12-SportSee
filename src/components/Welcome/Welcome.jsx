@@ -1,41 +1,42 @@
 import "./Welcome.scss";
 import { getMainData } from "../../services/APIservices";
-import MonJSON from "../../data/dashboard-master/app/data/data.json";
-
-// console.log(MonJSON);
+import MyJSON from "../../data/dashboard-master/app/data/data.json";
+import { useEffect, useState } from "react";
+// console.log(MyJSON);
 // console.log("------------------------");
-// console.log(MonJSON[0].USER_MAIN_DATA);
-// console.log(MonJSON[1].USER_ACTIVITY);
-// console.log(MonJSON[2].USER_AVERAGE_SESSIONS);
-// console.log(MonJSON[3].USER_PERFORMANCE);
+// console.log(MyJSON[0].USER_MAIN_DATA);
+// console.log(MyJSON[1].USER_ACTIVITY);
+// console.log(MyJSON[2].USER_AVERAGE_SESSIONS);
+// console.log(MyJSON[3].USER_PERFORMANCE);
 // console.log("------------------------");
-
-let userIdKarl = 12;
-let userIdCecilia = 18;
 
 function Welcome() {
+   // const [actualId, setActualId] = useState(12);
+   // console.log("actual ID useState === ", actualId);
+
    // Si sessionStorage est vide, alors on appelle la fonction API avec l'ID de Cecilia;
-   if (sessionStorage.getItem("profile") == null) {
-      sessionStorage.setItem("profile", GLOBAL_USER_ID_VALUE);
-   }
+   // if (sessionStorage.getItem("userMainData") == null) {
+   let actualId = sessionStorage.getItem("actualId");
+   sessionStorage.setItem("userMainData", getMainData(actualId));
+   // }
+   console.log("sessionStorage = ", sessionStorage);
+
    // Après usage de la fonction API, on informe que "dataAPI" a été utilisé (donc TRUE);
    if (sessionStorage.getItem("dataAPI") == null) {
       sessionStorage.setItem("dataAPI", true);
    }
 
-   // "profile" est l'ID de l'utilisateur;
-   let profile = sessionStorage.getItem("profile");
+   // useEffect(() => {
+   //    if (!actualId) {
+   //       sessionStorage.setItem("userMainData", getMainData(actualId));
+   //       console.log("slt !!!", sessionStorage.profileID);
+   //       console.log("slt !!!", sessionStorage.getItem("userMainData"));
+   //    }
+   //    console.log("useeffect Loaded");
+   // }, [actualId]);
 
-   // Usage de getMainData() avec l'ID de l'utilisateur;
-   getMainData(profile);
-
-   // Import des DATA depuis sessionStorage;
-   let mainData = JSON.parse(sessionStorage.mainData);
-   // console.log(mainData);
-
-   // Puis définition du "firstName" de l'utilisateur;
-   const firstName = mainData.data.userInfos.firstName;
-   // console.log(firstName);
+   const mainData = JSON.parse(sessionStorage.getItem("userMainData")); // Import des DATA depuis sessionStorage;
+   const firstName = mainData.data.userInfos.firstName; // Puis définition de "firstName";
 
    return (
       <div className="WelcomeWrapper">
