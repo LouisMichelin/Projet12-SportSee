@@ -3,7 +3,7 @@ const {
    USER_ACTIVITY,
    USER_AVERAGE_SESSIONS,
    USER_PERFORMANCE,
-} = require("./data");
+} = require("./data").default;
 
 /**
  * @description Retrieve the main user info (first name, last name, today score)

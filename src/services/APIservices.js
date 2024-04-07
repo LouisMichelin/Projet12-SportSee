@@ -1,28 +1,274 @@
-//////////////////////////////////////////////////////////
-//        FETCH() MODEL SI BESOIN POUR LES DATA         //
-//////////////////////////////////////////////////////////
-// fetch(path, {
-//    method: "POST",
-//    body: JSON.stringify({
-//       userId: 1,
-//       title: "Fix my bugs",
-//       completed: false,
-//    }),
-//    headers: {
-//       "Content-type": "application/json; charset=UTF-8",
-//    },
-// })
-//    .then((response) => response.json())
-//    .then((json) => console.log(json));
-// let mainDataAPI = sessionStorage.getItem("mainData");
-// console.log("maindataAPI", JSON.parse(mainDataAPI));
-//////////////////////////////////////////////////////////
-//
-//
-//////////////////////////////////////////////////////////
-//                     API FUNCTIONS                    //
-//////////////////////////////////////////////////////////
-export function getMainDataAPI(elementID) {
+// import { user_main_data } from "./data.js";
+
+const user_main_data = [
+   {
+      id: 12,
+      userInfos: {
+         firstName: "Karl",
+         lastName: "Dovineau",
+         age: 31,
+      },
+      todayScore: 0.12,
+      keyData: {
+         calorieCount: 1930,
+         proteinCount: 155,
+         carbohydrateCount: 290,
+         lipidCount: 50,
+      },
+   },
+   {
+      id: 18,
+      userInfos: {
+         firstName: "Cecilia",
+         lastName: "Ratorez",
+         age: 34,
+      },
+      todayScore: 0.3,
+      keyData: {
+         calorieCount: 2500,
+         proteinCount: 90,
+         carbohydrateCount: 150,
+         lipidCount: 120,
+      },
+   },
+];
+const user_activity = [
+   {
+      userId: 12,
+      sessions: [
+         {
+            day: "2020-07-01",
+            kilogram: 80,
+            calories: 240,
+         },
+         {
+            day: "2020-07-02",
+            kilogram: 80,
+            calories: 220,
+         },
+         {
+            day: "2020-07-03",
+            kilogram: 81,
+            calories: 280,
+         },
+         {
+            day: "2020-07-04",
+            kilogram: 81,
+            calories: 290,
+         },
+         {
+            day: "2020-07-05",
+            kilogram: 80,
+            calories: 160,
+         },
+         {
+            day: "2020-07-06",
+            kilogram: 78,
+            calories: 162,
+         },
+         {
+            day: "2020-07-07",
+            kilogram: 76,
+            calories: 390,
+         },
+      ],
+   },
+   {
+      userId: 18,
+      sessions: [
+         {
+            day: "2020-07-01",
+            kilogram: 70,
+            calories: 240,
+         },
+         {
+            day: "2020-07-02",
+            kilogram: 69,
+            calories: 220,
+         },
+         {
+            day: "2020-07-03",
+            kilogram: 70,
+            calories: 280,
+         },
+         {
+            day: "2020-07-04",
+            kilogram: 70,
+            calories: 500,
+         },
+         {
+            day: "2020-07-05",
+            kilogram: 69,
+            calories: 160,
+         },
+         {
+            day: "2020-07-06",
+            kilogram: 69,
+            calories: 162,
+         },
+         {
+            day: "2020-07-07",
+            kilogram: 69,
+            calories: 390,
+         },
+      ],
+   },
+];
+const user_average_sessions = [
+   {
+      userId: 12,
+      sessions: [
+         {
+            day: 1,
+            sessionLength: 30,
+         },
+         {
+            day: 2,
+            sessionLength: 23,
+         },
+         {
+            day: 3,
+            sessionLength: 45,
+         },
+         {
+            day: 4,
+            sessionLength: 50,
+         },
+         {
+            day: 5,
+            sessionLength: 0,
+         },
+         {
+            day: 6,
+            sessionLength: 0,
+         },
+         {
+            day: 7,
+            sessionLength: 60,
+         },
+      ],
+   },
+   {
+      userId: 18,
+      sessions: [
+         {
+            day: 1,
+            sessionLength: 30,
+         },
+         {
+            day: 2,
+            sessionLength: 40,
+         },
+         {
+            day: 3,
+            sessionLength: 50,
+         },
+         {
+            day: 4,
+            sessionLength: 30,
+         },
+         {
+            day: 5,
+            sessionLength: 30,
+         },
+         {
+            day: 6,
+            sessionLength: 50,
+         },
+         {
+            day: 7,
+            sessionLength: 50,
+         },
+      ],
+   },
+];
+const user_performance = [
+   {
+      userId: 12,
+      kind: {
+         1: "cardio",
+         2: "energy",
+         3: "endurance",
+         4: "strength",
+         5: "speed",
+         6: "intensity",
+      },
+      data: [
+         {
+            value: 80,
+            kind: 1,
+         },
+         {
+            value: 120,
+            kind: 2,
+         },
+         {
+            value: 140,
+            kind: 3,
+         },
+         {
+            value: 50,
+            kind: 4,
+         },
+         {
+            value: 200,
+            kind: 5,
+         },
+         {
+            value: 90,
+            kind: 6,
+         },
+      ],
+   },
+   {
+      userId: 18,
+      kind: {
+         1: "cardio",
+         2: "energy",
+         3: "endurance",
+         4: "strength",
+         5: "speed",
+         6: "intensity",
+      },
+      data: [
+         {
+            value: 200,
+            kind: 1,
+         },
+         {
+            value: 240,
+            kind: 2,
+         },
+         {
+            value: 80,
+            kind: 3,
+         },
+         {
+            value: 80,
+            kind: 4,
+         },
+         {
+            value: 220,
+            kind: 5,
+         },
+         {
+            value: 110,
+            kind: 6,
+         },
+      ],
+   },
+];
+module.exports = {
+   user_main_data,
+   user_activity,
+   user_average_sessions,
+   user_performance,
+};
+//////////////////////////////////////////////////////
+
+const isDataMocked = true;
+
+function getMainDataAPI(userID) {
    fetch(`http://localhost:1337/user/${elementID}`, {
       method: "GET",
       headers: {
@@ -36,14 +282,14 @@ export function getMainDataAPI(elementID) {
          throw response;
       })
       .then((data) => {
-         // console.log(data);
+         console.log(data);
          sessionStorage.setItem("userMainData", JSON.stringify(data));
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
       });
 }
-export function getActivityDataAPI(elementID) {
+function getActivityDataAPI(userID) {
    fetch(`http://localhost:1337/user/${elementID}/activity`, {
       method: "GET",
       headers: {
@@ -64,7 +310,7 @@ export function getActivityDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-export function getAverageDataAPI(elementID) {
+function getAverageDataAPI(userID) {
    fetch(`http://localhost:1337/user/${elementID}/average-sessions`, {
       method: "GET",
       headers: {
@@ -85,7 +331,7 @@ export function getAverageDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-export function getPerformanceDataAPI(elementID) {
+function getPerformanceDataAPI(userID) {
    fetch(`http://localhost:1337/user/${elementID}/performance`, {
       method: "GET",
       headers: {
@@ -106,36 +352,30 @@ export function getPerformanceDataAPI(elementID) {
          console.error("Error fetching : ", error);
       });
 }
-//
-//
+
 //////////////////////////////////////////////////////////
 //                     MOCKED FUNCTIONS                 //
 //////////////////////////////////////////////////////////
-export function getMainDataMocked(elementID) {
-   // Récupérer les données MAIN DATA depuis le fichier DATA.JSON
-   // que j'aurais créé
+function getMainDataMocked(userID) {
+   return user_main_data.find((element) => {
+      element.id == userID;
+   });
 }
-export function getActivityDataMocked(elementID) {}
-export function getAverageDataMocked(elementID) {}
-export function getPerformanceDataMocked(elementID) {}
-//
-//
+function getActivityDataMocked(userID) {}
+function getAverageDataMocked(userID) {}
+function getPerformanceDataMocked(userID) {}
+
 //////////////////////////////////////////////////////////
 //                     MAIN FUNCTIONS                   //
 //////////////////////////////////////////////////////////
-export function getMainData(elementID) {
-   // CHECK VERIFICATION DU REGLAGE DE L'APP :
-   // IF DATA MOCKED ? ALORS DATA API CALLED : DATA API
-   // ET LE COMPONANT VA APPELER getMainData();
-   // sessionStorage.setItem("profile", JSON.stringify(elementID));
-   // sessionStorage.setItem("profile", elementID);
-
-   // Si sessionStorage est vide, alors on appelle la fonction API getMainDataAPI()
-   if (sessionStorage.getItem("userMainData") == null) {
-      getMainDataAPI(elementID);
+export function getMainData(userID) {
+   if (isDataMocked) {
+      console.log("hello world");
+      return getMainDataMocked(userID);
+   } else {
+      return getMainDataAPI(userID);
    }
-   // ELSE : on utilise les DATA du fichier JSON
 }
-export function getActivityData(elementID) {}
-export function getAverageData(elementID) {}
-export function getPerformanceData(elementID) {}
+export function getActivityData(userID) {}
+export function getAverageData(userID) {}
+export function getPerformanceData(userID) {}
