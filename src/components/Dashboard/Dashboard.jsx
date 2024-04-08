@@ -1,11 +1,14 @@
 import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
-import Daily from "../Daily/Daily.jsx";
-import Sessions from "../Sessions/Sessions.jsx";
-import Performances from "../Performances/Performances.jsx";
-import Score from "../Score/Score.jsx";
+// import Daily from "../Daily/Daily.jsx";
+// import Sessions from "../Sessions/Sessions.jsx";
+// import Performances from "../Performances/Performances.jsx";
+// import Score from "../Score/Score.jsx";
+import { useParams } from "react-router-dom";
 
 function Dashboard() {
+   const { id } = useParams();
+
    return (
       <div className="DashboardWrapper">
          <Welcome />

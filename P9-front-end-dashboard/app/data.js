@@ -1,8 +1,3 @@
-// import { USER_MAIN_DATA } from "../../P9-front-end-dashboard/app/data";
-// import { USER_MAIN_DATA } from "../data/data";
-// ==> The requested module '/src/data/data.js?t=1712579940312' does not provide an export named 'USER_MAIN_DATA' (at APIservices.js:2:10)
-// ---------------------------------------------------------------------------------------------------------------------------------------
-// SEULE METHODE POUR EVITER LES ERREURS D'IMPORT :
 const USER_MAIN_DATA = [
    {
       id: 12,
@@ -26,7 +21,7 @@ const USER_MAIN_DATA = [
          lastName: "Ratorez",
          age: 34,
       },
-      todayScore: 0.3,
+      score: 0.3,
       keyData: {
          calorieCount: 2500,
          proteinCount: 90,
@@ -35,6 +30,7 @@ const USER_MAIN_DATA = [
       },
    },
 ];
+
 const USER_ACTIVITY = [
    {
       userId: 12,
@@ -117,6 +113,7 @@ const USER_ACTIVITY = [
       ],
    },
 ];
+
 const USER_AVERAGE_SESSIONS = [
    {
       userId: 12,
@@ -185,6 +182,7 @@ const USER_AVERAGE_SESSIONS = [
       ],
    },
 ];
+
 const USER_PERFORMANCE = [
    {
       userId: 12,
@@ -262,131 +260,9 @@ const USER_PERFORMANCE = [
    },
 ];
 
-// ---------------------------------------------------------------------------------------------------------------------------------------
-
-const isDataMocked = true;
-
-function getMainDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((response) => {
-         if (response.ok) {
-            return response.json();
-         }
-         throw response;
-      })
-      .then((data) => {
-         console.log(data);
-         sessionStorage.setItem("userMainData", JSON.stringify(data));
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
-}
-function getActivityDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}/activity`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((res) => {
-         if (res.ok) {
-            return res.json();
-         }
-         throw res;
-      })
-      .then((data) => {
-         // console.log(data);
-         sessionStorage.setItem("userActivityData", JSON.stringify(data));
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
-}
-function getAverageDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}/average-sessions`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((res) => {
-         if (res.ok) {
-            return res.json();
-         }
-         throw res;
-      })
-      .then((data) => {
-         // console.log(data);
-         sessionStorage.setItem("userAverageData", JSON.stringify(data));
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
-}
-function getPerformanceDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}/performance`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((res) => {
-         if (res.ok) {
-            return res.json();
-         }
-         throw res;
-      })
-      .then((data) => {
-         // console.log(data);
-         sessionStorage.setItem("userPerformanceData", JSON.stringify(data));
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
-}
-
-//////////////////////////////////////////////////////////
-//                     MOCKED FUNCTIONS                 //
-//////////////////////////////////////////////////////////
-function getMainDataMocked(userID) {
-   return USER_MAIN_DATA.find((element) => element.id == userID);
-   // console.log("test", test);
-}
-function getActivityDataMocked(userID) {
-   return USER_ACTIVITY.find((element) => {
-      element.id == userID;
-   });
-}
-function getAverageDataMocked(userID) {
-   return USER_AVERAGE_SESSIONS.find((element) => {
-      element.id == userID;
-   });
-}
-function getPerformanceDataMocked(userID) {
-   return USER_PERFORMANCE.find((element) => {
-      element.id == userID;
-   });
-}
-
-//////////////////////////////////////////////////////////
-//                     MAIN FUNCTIONS                   //
-//////////////////////////////////////////////////////////
-export function getMainData(userID) {
-   if (isDataMocked) {
-      // console.log(USER_MAIN_DATA[0].id);
-      // console.log(getMai);
-      console.log("slt MAINDATA fonctionne");
-      return getMainDataMocked(userID);
-   } else {
-      return getMainDataAPI(userID);
-   }
-}
-export function getActivityData(userID) {}
-export function getAverageData(userID) {}
-export function getPerformanceData(userID) {}
+module.exports = {
+   USER_MAIN_DATA,
+   USER_ACTIVITY,
+   USER_AVERAGE_SESSIONS,
+   USER_PERFORMANCE,
+};

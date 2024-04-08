@@ -3,13 +3,14 @@ import { getMainData } from "../../services/APIservices";
 
 function Welcome() {
    const welcomeUserID = getMainData(12);
+   const welcomeUserFirstName = welcomeUserID.userInfos.firstName;
 
    return (
       <div className="WelcomeWrapper">
          <div className="WelcomeMessage">
             Bonjour&nbsp;
             <span id="WelcomeName" style={{ color: "#FF0101" }}>
-               {welcomeUserID}
+               {welcomeUserFirstName}
             </span>
          </div>
          <div className="WelcomeMessageCongrats">
