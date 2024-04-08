@@ -1,8 +1,10 @@
 import "./Welcome.scss";
 import { getMainData } from "../../services/APIservices";
+import { useParams } from "react-router-dom";
 
 function Welcome() {
-   const welcomeUserID = getMainData(12);
+   const { id } = useParams();
+   const welcomeUserID = getMainData(id);
    const welcomeUserFirstName = welcomeUserID.userInfos.firstName;
 
    return (
