@@ -280,8 +280,19 @@ function getMainDataAPI(userID) {
          throw response;
       })
       .then((data) => {
-         console.log(data);
-         sessionStorage.setItem("userMainData", JSON.stringify(data));
+         // RIEN NE MARCHE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         // ---> Les console.log() retournent TOUTES le firstName attendu
+         // ---> MAIS c'est récupéré en UNDEFINED depuis <Welcome /> !!!
+         // ........
+         // QUE FAIRE ?????????????????????????????
+         console.log("on fait appel à l'API fetch");
+         let dataVar = data.data;
+         console.log("dataVar: ", dataVar.userInfos.firstName);
+         let firstNameVar = dataVar.userInfos.firstName;
+         console.log(firstNameVar);
+         return firstNameVar;
+         // OU ALORS
+         // On en fait un localStorage() ????????????????????????????????????
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -356,12 +367,9 @@ function getPerformanceDataAPI(userID) {
 //////////////////////////////////////////////////////////
 function getMainDataMocked(userID) {
    return USER_MAIN_DATA.find((element) => element.id == userID);
-   // console.log("test", test);
 }
 function getActivityDataMocked(userID) {
-   return USER_ACTIVITY.find((element) => {
-      element.id == userID;
-   });
+   return USER_ACTIVITY.find((element) => element.userId == userID);
 }
 function getAverageDataMocked(userID) {
    return USER_AVERAGE_SESSIONS.find((element) => {
@@ -379,14 +387,21 @@ function getPerformanceDataMocked(userID) {
 //////////////////////////////////////////////////////////
 export function getMainData(userID) {
    if (isDataMocked) {
-      // console.log(USER_MAIN_DATA[0].id);
-      // console.log(getMai);
-      console.log("La Fonction getMainData() fonctionne");
+      console.log("getMainData() version MOCKED");
       return getMainDataMocked(userID);
    } else {
+      console.log("getMainData() version API FETCH");
       return getMainDataAPI(userID);
    }
 }
-export function getActivityData(userID) {}
+export function getActivityData(userID) {
+   if (isDataMocked) {
+      console.log("getActivityDataMocked() version MOCKED");
+      return getActivityDataMocked(userID);
+   } else {
+      console.log("getActivityDataAPI() version API FETCH");
+      return getActivityDataAPI(userID);
+   }
+}
 export function getAverageData(userID) {}
 export function getPerformanceData(userID) {}

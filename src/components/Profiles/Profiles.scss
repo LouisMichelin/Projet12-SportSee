@@ -4,15 +4,15 @@
 .ProfilesHiddenMenu {
    display: none;
    position: absolute;
-   justify-content: center;
-   padding: 10px;
+   justify-content: space-evenly;
+   flex-direction: column;
+   padding: 5px;
    height: auto;
    width: auto;
-   flex-direction: column;
    background-color: red;
 }
 .ProfilesHidden {
-   padding-top: 5px;
+   padding: 5px;
    text-decoration: none;
    color: white;
 }

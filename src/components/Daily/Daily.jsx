@@ -11,22 +11,15 @@ import {
    CartesianGrid,
 } from "recharts";
 import { getActivityData } from "../../services/APIservices";
-
-let userId = 12;
+import { useParams } from "react-router-dom";
 
 function Daily() {
-   // Si la sessionStorage est null alors on appelle la fonction API getActivityData()
-   if (sessionStorage.getItem("activityData") == null) {
-      getActivityData(userId);
-   }
-   const activityData = JSON.parse(sessionStorage.getItem("activityData"));
-   // console.log(activityData);
-   if (activityData.data.id != userId) {
-      getActivityData(userId);
-   }
+   const { id } = useParams();
+   const userData = getActivityData(id);
+   const userSessions = userData.sessions;
    // Utilisation des Data "fetched"
-   const userSessions = activityData.data.sessions;
    const graphData = [];
+
    userSessions.forEach((element, index) => {
       graphData.push({
          // PUSH de chaque SESSION dans graphData[]

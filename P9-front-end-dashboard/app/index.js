@@ -5,7 +5,7 @@ const router = require("./routes");
 
 const app = express();
 app.use(cors());
-const port = 3000;
+const port = 1337;
 
 app.use(router);
 
