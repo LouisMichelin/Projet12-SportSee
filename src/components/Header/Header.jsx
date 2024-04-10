@@ -8,7 +8,9 @@ function Header() {
       <div className="HeaderWrapper">
          <img className="HeaderLogo" src={Sportsee} alt="Logo Sportsee" />
          <nav className="NavContainer">
-            <div className="NavLink">Accueil</div>
+            <a className="NavLink" style={{ textDecoration: "none" }} href="/">
+               Accueil
+            </a>
             <div className="NavLink">
                <Profiles />
             </div>

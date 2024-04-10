@@ -381,7 +381,7 @@ export function getMainData(userID) {
    if (isDataMocked) {
       // console.log(USER_MAIN_DATA[0].id);
       // console.log(getMai);
-      console.log("slt MAINDATA fonctionne");
+      console.log("La Fonction getMainData() fonctionne");
       return getMainDataMocked(userID);
    } else {
       return getMainDataAPI(userID);

@@ -1,5 +1,5 @@
 .ProfilesWrapper:hover > .ProfilesHiddenMenu {
-   display: block;
+   display: flex;
 }
 .ProfilesHiddenMenu {
    display: none;
@@ -8,10 +8,11 @@
    padding: 10px;
    height: auto;
    width: auto;
-   // margin-top: 50px;
    flex-direction: column;
    background-color: red;
 }
 .ProfilesHidden {
-   padding-top: 10px;
+   padding-top: 5px;
+   text-decoration: none;
+   color: white;
 }

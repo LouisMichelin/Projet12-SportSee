@@ -5,12 +5,12 @@ function Profiles() {
       <div className="ProfilesWrapper">
          Profil
          <nav className="ProfilesHiddenMenu">
-            <div className="ProfilesHidden" onClick={() => setActualID(12)}>
-               User 1
-            </div>
-            <div className="ProfilesHidden" onClick={() => setActualID(18)}>
-               User 2
-            </div>
+            <a href="/12" className="ProfilesHidden">
+               Karl
+            </a>
+            <a href="/18" className="ProfilesHidden">
+               Cécilia
+            </a>
          </nav>
       </div>
    );
