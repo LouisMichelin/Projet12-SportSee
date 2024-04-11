@@ -164,14 +164,15 @@ function Daily() {
                   orientation="right"
                   axisLine={false}
                   tickLine={false}
-                  interval={1}
+                  // interval={1}
                   style={{
                      fontWeight: "600",
                      fontSize: "14px",
                      fill: "#9B9EAC",
                   }}
                   dx={25}
-                  // tick={[0, 100]}
+                  domain={["auto", "auto"]}
+                  tickCount={3}
                />
                {/*CALORIES*/}
                <YAxis
@@ -179,7 +180,6 @@ function Daily() {
                   orientation="left"
                   axisLine={false}
                   tickLine={false}
-                  interval={1}
                   hide
                />
                <Tooltip
