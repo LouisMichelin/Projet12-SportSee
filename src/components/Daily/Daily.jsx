@@ -106,175 +106,30 @@ function Daily() {
       return null;
    };
    // // CUSTOMIZED LEGEND
-   // const RenderCustomizedLegend = () => {
-   //    return (
-   //       <div className="LegendWrapper">
-   //          <div className="LegendPoids">
-   //             <div
-   //                className="LegendCircle"
-   //                style={{ backgroundColor: "black" }}
-   //             ></div>
-   //             <div>Poids (kg)</div>
-   //          </div>
-   //          <div className="LegendCalories">
-   //             <div
-   //                className="LegendCircle"
-   //                style={{ backgroundColor: "red" }}
-   //             ></div>
-   //             <div>Calories brûlées (kCal)</div>
-   //          </div>
-   //       </div>
-   //    );
-   // };
-   // // CUSTOMIZED AXE X
-   // const CustomizedAxisTickX = ({ x, y, payload }) => {
-   //    return (
-   //       <g transform={`translate(${x},${y})`}>
-   //          <text
-   //             x={0}
-   //             y={0}
-   //             dy={25}
-   //             fill="#9B9EAC"
-   //             style={{ fontWeight: "600", fontSize: "14px" }}
-   //          >
-   //             {payload.value}
-   //          </text>
-   //       </g>
-   //    );
-   // };
-   // // CUSTOMIZED AXE Y
-   // const CustomizedAxisTickY = ({ x, y, payload }) => {
-   //    return (
-   //       <g transform={`translate(${x},${y})`}>
-   //          <text
-   //             x={0}
-   //             y={0}
-   //             dy={5}
-   //             dx={30}
-   //             fill="#9B9EAC"
-   //             style={{ fontWeight: "600", fontSize: "14px" }}
-   //          >
-   //             {payload.value}
-   //          </text>
-   //       </g>
-   //    );
-   // };
-
-   // TEEEEEEEEEEEEEEEEEEEEEEEEEEST
-   const data = [
-      {
-         name: "Page A",
-         uv: 4000,
-         pv: 2400,
-         amt: 2400,
-      },
-      {
-         name: "Page B",
-         uv: 3000,
-         pv: 1398,
-         amt: 2210,
-      },
-      {
-         name: "Page C",
-         uv: 2000,
-         pv: 9800,
-         amt: 2290,
-      },
-      {
-         name: "Page D",
-         uv: 2780,
-         pv: 3908,
-         amt: 2000,
-      },
-      {
-         name: "Page E",
-         uv: 1890,
-         pv: 4800,
-         amt: 2181,
-      },
-      {
-         name: "Page F",
-         uv: 2390,
-         pv: 3800,
-         amt: 2500,
-      },
-      {
-         name: "Page G",
-         uv: 3490,
-         pv: 4300,
-         amt: 2100,
-      },
-   ];
+   const RenderCustomizedLegend = () => {
+      return (
+         <div className="LegendWrapper">
+            <div className="LegendPoids">
+               <div
+                  className="LegendCircle"
+                  style={{ backgroundColor: "black" }}
+               ></div>
+               <div>Poids (kg)</div>
+            </div>
+            <div className="LegendCalories">
+               <div
+                  className="LegendCircle"
+                  style={{ backgroundColor: "red" }}
+               ></div>
+               <div>Calories brûlées (kCal)</div>
+            </div>
+         </div>
+      );
+   };
 
    return (
       <div className="DailyWrapper">
          <div className="DailyTitle">Activité quotidienne</div>
-         {/* <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-               data={graphData}
-               margin={{
-                  top: 30,
-                  right: 10,
-                  left: 50,
-                  bottom: 5,
-               }}
-               barSize={10}
-               barGap={8}
-            >
-               <Legend verticalAlign="top" content={RenderCustomizedLegend} />
-               <CartesianGrid strokeDasharray="2" vertical={false} />
-               <ReferenceLine x="0" />
-               <XAxis
-                  dataKey="day"
-                  height={60}
-                  width={"auto"}
-                  tickLine={false}
-                  axisLine={{ stroke: "#d1d2d6" }}
-                  tick={CustomizedAxisTickX}
-                  padding={{ left: -40, right: -40 }}
-               />
-               <YAxis
-                  dataKey={"calories"}
-                  tick={CustomizedAxisTickY}
-                  type="number"
-                  interval={1}
-                  // domain={["min", "auto"]}
-                  hide
-                  
-               />
-               <YAxis
-                  dataKey={"poids"}
-                  tick={CustomizedAxisTickY}
-                  orientation="right"
-                  type="number"
-                  domain={["min", "auto"]}
-                  interval={1}
-                  axisLine={false}
-                  tickLine={false}
-                  width={90}
-                  yAxisId="right"
-               />
-
-               <Tooltip
-                  content={CustomTooltip}
-                  cursor={{ fill: "#C4C4C480" }}
-               />
-               <Bar
-                  color="#74798c"
-                  name="Poids (kg)"
-                  dataKey="poids"
-                  fill="black"
-                  radius={[4.5, 4.5, 0, 0]}
-               />
-               <Bar
-                  color="#74798c"
-                  name="Calories brûlées (kCal)"
-                  dataKey="calories"
-                  fill="red"
-                  radius={[4.5, 4.5, 0, 0]}
-               />
-            </BarChart>
-         </ResponsiveContainer> */}
          <ResponsiveContainer width="100%" height="100%">
             <BarChart
                data={graphData}
@@ -287,22 +142,63 @@ function Daily() {
                barSize={10}
                barGap={8}
             >
-               <CartesianGrid strokeDasharray="2" />
-               <XAxis dataKey="day" />
-               <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+               <CartesianGrid strokeDasharray="2" vertical={false} />
+               {/*ABSCISSES*/}
+               <XAxis
+                  dataKey="day"
+                  height={60}
+                  width={"auto"}
+                  tickLine={false}
+                  axisLine={{ stroke: "#d1d2d6" }}
+                  padding={{ left: -40, right: -40 }}
+                  dy={15}
+                  style={{
+                     fontWeight: "600",
+                     fontSize: "14px",
+                     fill: "#9B9EAC",
+                  }}
+               />
+               {/*POIDS*/}
                <YAxis
                   yAxisId="right"
                   orientation="right"
-                  stroke="#82ca9d"
-                  domain={["min", "auto"]}
+                  axisLine={false}
+                  tickLine={false}
+                  interval={1}
+                  style={{
+                     fontWeight: "600",
+                     fontSize: "14px",
+                     fill: "#9B9EAC",
+                  }}
+                  dx={25}
+                  // tick={[0, 100]}
+               />
+               {/*CALORIES*/}
+               <YAxis
+                  yAxisId="left"
+                  orientation="left"
+                  axisLine={false}
+                  tickLine={false}
+                  interval={1}
+                  hide
                />
                <Tooltip
                   content={CustomTooltip}
                   cursor={{ fill: "#C4C4C480" }}
                />
-               <Legend />
-               <Bar yAxisId="left" dataKey="calories" fill="red" />
-               <Bar yAxisId="right" dataKey="poids" fill="black" />
+               <Legend verticalAlign="top" content={RenderCustomizedLegend} />
+               <Bar
+                  yAxisId="right"
+                  dataKey="poids"
+                  fill="black"
+                  radius={[4.5, 4.5, 0, 0]}
+               />
+               <Bar
+                  yAxisId="left"
+                  dataKey="calories"
+                  fill="red"
+                  radius={[4.5, 4.5, 0, 0]}
+               />
             </BarChart>
          </ResponsiveContainer>
       </div>
