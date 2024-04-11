@@ -16,18 +16,66 @@ import { useParams } from "react-router-dom";
 function Daily() {
    const { id } = useParams();
    const userData = getActivityData(id);
-   const userSessions = userData.sessions;
-   // Utilisation des Data "fetched"
-   const graphData = [];
-
-   userSessions.forEach((element, index) => {
-      graphData.push({
-         // PUSH de chaque SESSION dans graphData[]
-         day: [index + 1],
-         poids: element.kilogram,
-         calories: element.calories,
+   let graphData = [];
+   // Valeurs pour "Default User"
+   let defaultValues = [
+      {
+         day: "2024-01-01",
+         kilogram: 50,
+         calories: 100,
+      },
+      {
+         day: "2024-01-02",
+         kilogram: 50,
+         calories: 200,
+      },
+      {
+         day: "2024-01-03",
+         kilogram: 45,
+         calories: 300,
+      },
+      {
+         day: "2024-01-04",
+         kilogram: 45,
+         calories: 400,
+      },
+      {
+         day: "2024-01-05",
+         kilogram: 40,
+         calories: 500,
+      },
+      {
+         day: "2024-01-06",
+         kilogram: 45,
+         calories: 600,
+      },
+      {
+         day: "2024-01-07",
+         kilogram: 40,
+         calories: 700,
+      },
+   ];
+   // Si "Default User" // Si "User" avec ID connu
+   if (id == undefined) {
+      defaultValues.forEach((element, index) => {
+         graphData.push({
+            day: [index + 1],
+            poids: element.kilogram,
+            calories: element.calories,
+         });
       });
-   });
+   } else if (id) {
+      const userSessions = userData.sessions;
+      // Utilisation des Données-Utilisateur
+      userSessions.forEach((element, index) => {
+         graphData.push({
+            // PUSH de chaque SESSION dans graphData[]
+            day: [index + 1],
+            poids: element.kilogram,
+            calories: element.calories,
+         });
+      });
+   }
 
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
@@ -118,6 +166,12 @@ function Daily() {
          <ResponsiveContainer width="100%" height="100%">
             <BarChart
                data={graphData}
+               // margin={{
+               //    top: 0,
+               //    right: 0,
+               //    left: 0,
+               //    bottom: 0,
+               // }}
                margin={{
                   top: 30,
                   right: 10,
@@ -133,28 +187,38 @@ function Daily() {
                <XAxis
                   dataKey="day"
                   height={60}
-                  width={50}
+                  width={"auto"}
                   tickLine={false}
                   axisLine={{ stroke: "#d1d2d6" }}
                   tick={CustomizedAxisTickX}
-                  // padding={{ left: -40, right: -40 }}
+                  padding={{ left: -40, right: -40 }}
                />
                <YAxis
                   dataKey={"calories"}
                   tick={CustomizedAxisTickY}
+                  type="number"
+                  interval={1}
+                  hide
+               />
+               <YAxis
+                  dataKey={"poids"}
+                  tick={CustomizedAxisTickY}
                   orientation="right"
                   type="number"
-                  domain={[0, "auto"]}
+                  domain={["min", "auto"]}
                   interval={1}
                   axisLine={false}
                   tickLine={false}
                   width={90}
+                  yAxisId="right"
                />
+
                <Tooltip
                   content={CustomTooltip}
                   cursor={{ fill: "#C4C4C480" }}
                />
                <Bar
+                  // yAxisId="left"
                   color="#74798c"
                   name="Poids (kg)"
                   dataKey="poids"
@@ -162,6 +226,7 @@ function Daily() {
                   radius={[4.5, 4.5, 0, 0]}
                />
                <Bar
+                  // yAxisId="right"
                   color="#74798c"
                   name="Calories brûlées (kCal)"
                   dataKey="calories"
