@@ -52,102 +52,99 @@ function Sessions() {
    ];
    // Data Jours de la semaine
    const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
-
    // Si "Default User" // Sinon "User" avec ID connu
    if (id == undefined) {
       defaultValues.forEach((element, index) => {
          graphData.push({
             day: weeklyDays[index],
-            length: element.sessionLength,
+            duree: element.sessionLength,
          });
       });
    } else if (id) {
       const userSessions = userData.sessions;
-
-      // Utilisation des Données-Utilisateur
       userSessions.forEach((element, index) => {
          graphData.push({
             day: weeklyDays[index],
-            length: element.sessionLength,
+            duree: element.sessionLength,
          });
       });
-      console.log(graphData);
    }
 
-   // // CUSTOMIZED AXE ABSCISSES
-   const CustomizedAxisTickX = ({ x, y, payload }) => {
-      return (
-         <g transform={`translate(${x},${y})`}>
-            <text
-               x={-5}
-               y={0}
-               dy={25}
-               // dx={10}
-               fill="#ffffff"
+   // CUSTOMIZED TOOLTIP
+   const CustomTooltip = ({ active, payload }) => {
+      if (active && payload && payload.length) {
+         return (
+            <div
                style={{
-                  fontSize: "14px",
-                  opacity: "0.66",
+                  backgroundColor: "white",
+                  width: "45px",
+                  height: "25px",
+                  fontSize: "8px",
+                  fontWeight: "600",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                }}
             >
-               {payload.value}
-            </text>
-         </g>
-      );
+               <p className="label">{`${payload[0].value} min`}</p>
+            </div>
+         );
+      }
+      return null;
    };
 
    return (
-      <div
-         className="SessionsWrapper"
-         style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-         }}
-      >
-         <div
-            style={{
-               margin: "10px 0px 0px 10px",
-               position: "absolute",
-               color: "#FFFFFF",
-               fontWeight: "600",
-               fontSize: "14px",
-            }}
-            className="SessionsTitle"
-         >
-            Durée moyenne des sessions
-         </div>
-         <ResponsiveContainer width="100%" height={240}>
+      <div className="SessionsWrapper">
+         <div className="SessionsTitle">Durée moyenne des sessions</div>
+         <ResponsiveContainer width="100%" height="100%">
             <LineChart
-               // width={260}
-               // height={240}
                data={graphData}
                margin={{
-                  top: 5,
-                  right: 15,
-                  left: 15,
-                  bottom: 5,
+                  top: 20,
+                  // right: 20,
+                  // left: 20,
+                  bottom: 20,
                }}
             >
-               {/* <CartesianGrid strokeDasharray="3 3" /> */}
+               {/*OPACITY FADED SETTING */}
+               <defs>
+                  <linearGradient id="colorUv">
+                     <stop offset="5%" stopColor="#ffffff" stopOpacity={0.5} />
+                     <stop
+                        offset="50%"
+                        stopColor="#ffffff"
+                        stopOpacity={0.75}
+                     />
+                     <stop
+                        offset="100%"
+                        stopColor="#ffffff"
+                        stopOpacity={0.8}
+                     />
+                  </linearGradient>
+               </defs>
+               {/*LINE CHART SETTINGS*/}
                <XAxis
                   dataKey="day"
                   color="#ffffff"
-                  tick={CustomizedAxisTickX}
                   tickLine={false}
                   axisLine={false}
+                  dy={10}
+                  padding={{ left: 15, right: 15 }}
+                  style={{
+                     fontSize: "14px",
+                     opacity: "0.66",
+                     fill: "#ffffff",
+                  }}
                />
-               {/*<YAxis dataKey="length" /> */}
-               <Tooltip />
-
+               <Tooltip content={CustomTooltip} />
                <Line
                   type="monotone"
-                  dataKey="length"
-                  stroke="#ffffff"
-                  activeDot={{ r: 8 }}
-                  style={{
-                     // fontSize: "14px",
-                     opacity: "0.66",
-                  }}
+                  dataKey="duree"
+                  stroke="url(#colorUv)"
+                  strokeOpacity={1} // OPACITY de la COURBE
+                  strokeWidth={2}
+                  activeDot={{ r: 4 }}
                   dot={null}
                />
             </LineChart>

@@ -5,7 +5,7 @@ import {
    ResponsiveContainer,
    BarChart,
    Bar,
-   ReferenceLine,
+   // ReferenceLine,
    XAxis,
    YAxis,
    CartesianGrid,
@@ -69,7 +69,6 @@ function Daily() {
       });
    } else if (id) {
       const userSessions = userData.sessions;
-      // Utilisation des Données-Utilisateur
       userSessions.forEach((element, index) => {
          graphData.push({
             day: [index + 1],
@@ -79,7 +78,7 @@ function Daily() {
       });
    }
 
-   // // CUSTOMIZED TOOLTIP
+   // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
       if (active && payload && payload.length) {
          return (
@@ -107,7 +106,7 @@ function Daily() {
       }
       return null;
    };
-   // // CUSTOMIZED LEGEND
+   // CUSTOMIZED LEGEND
    const RenderCustomizedLegend = () => {
       return (
          <div className="LegendWrapper">

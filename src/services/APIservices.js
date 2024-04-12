@@ -372,14 +372,10 @@ function getActivityDataMocked(userID) {
    return USER_ACTIVITY.find((element) => element.userId == userID);
 }
 function getAverageDataMocked(userID) {
-   return USER_AVERAGE_SESSIONS.find((element) => {
-      element.userId == userID;
-   });
+   return USER_AVERAGE_SESSIONS.find((element) => element.userId == userID);
 }
 function getPerformanceDataMocked(userID) {
-   return USER_PERFORMANCE.find((element) => {
-      element.userId == userID;
-   });
+   return USER_PERFORMANCE.find((element) => element.userId == userID);
 }
 
 //////////////////////////////////////////////////////////
