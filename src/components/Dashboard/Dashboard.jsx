@@ -2,8 +2,8 @@ import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
 import Daily from "../Daily/Daily.jsx";
 import Sessions from "../Sessions/Sessions.jsx";
-// import Performances from "../Performances/Performances.jsx";
-// import Score from "../Score/Score.jsx";
+import Performances from "../Performances/Performances.jsx";
+import Score from "../Score/Score.jsx";
 
 function Dashboard() {
    return (
@@ -14,8 +14,8 @@ function Dashboard() {
                <Daily />
                <div className="DashboardDetails">
                   <Sessions />
-                  {/* <Performances /> */}
-                  {/* <Score /> */}
+                  <Performances />
+                  <Score />
                </div>
             </div>
             <div className="DashboardScientificValues">

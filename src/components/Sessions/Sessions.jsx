@@ -1,14 +1,5 @@
 import "./Sessions.scss";
-import {
-   LineChart,
-   Line,
-   XAxis,
-   YAxis,
-   CartesianGrid,
-   Tooltip,
-   Legend,
-   ResponsiveContainer,
-} from "recharts";
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { getAverageData } from "../../services/APIservices";
 import { useParams } from "react-router-dom";
 
@@ -68,7 +59,7 @@ function Sessions() {
             duree: element.sessionLength,
          });
       });
-   }
+   } // else if (!isDataMocked) {}
 
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
