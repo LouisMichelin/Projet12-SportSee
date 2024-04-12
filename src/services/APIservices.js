@@ -312,8 +312,8 @@ function getActivityDataAPI(userID) {
          throw res;
       })
       .then((data) => {
-         // console.log(data);
-         sessionStorage.setItem("userActivityData", JSON.stringify(data));
+         // sessionStorage.setItem("userActivityData", JSON.stringify(data));
+         // MÊME PROBLEME QUE L.269
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -333,8 +333,8 @@ function getAverageDataAPI(userID) {
          throw res;
       })
       .then((data) => {
-         // console.log(data);
-         sessionStorage.setItem("userAverageData", JSON.stringify(data));
+         // sessionStorage.setItem("userAverageData", JSON.stringify(data));
+         // MÊME PROBLEME QUE L.269
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -354,8 +354,8 @@ function getPerformanceDataAPI(userID) {
          throw res;
       })
       .then((data) => {
-         // console.log(data);
-         sessionStorage.setItem("userPerformanceData", JSON.stringify(data));
+         // sessionStorage.setItem("userPerformanceData", JSON.stringify(data));
+         // MÊME PROBLEME QUE L.269
       })
       .catch((error) => {
          console.error("Error fetching : ", error);
@@ -373,12 +373,12 @@ function getActivityDataMocked(userID) {
 }
 function getAverageDataMocked(userID) {
    return USER_AVERAGE_SESSIONS.find((element) => {
-      element.id == userID;
+      element.userId == userID;
    });
 }
 function getPerformanceDataMocked(userID) {
    return USER_PERFORMANCE.find((element) => {
-      element.id == userID;
+      element.userId == userID;
    });
 }
 
@@ -403,5 +403,21 @@ export function getActivityData(userID) {
       return getActivityDataAPI(userID);
    }
 }
-export function getAverageData(userID) {}
-export function getPerformanceData(userID) {}
+export function getAverageData(userID) {
+   if (isDataMocked) {
+      console.log("getAverageDataMocked() version MOCKED");
+      return getAverageDataMocked(userID);
+   } else {
+      console.log("getAverageDataAPI() version API FETCH");
+      return getAverageDataAPI(userID);
+   }
+}
+export function getPerformanceData(userID) {
+   if (isDataMocked) {
+      console.log("getAverageDataMocked() version MOCKED");
+      return getPerformanceDataMocked(userID);
+   } else {
+      console.log("getAverageDataAPI() version API FETCH");
+      return getPerformanceDataAPI(userID);
+   }
+}

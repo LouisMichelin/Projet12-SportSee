@@ -3,16 +3,17 @@ import { getMainData } from "../../services/APIservices";
 import { useParams } from "react-router-dom";
 
 function Welcome() {
+   // ID depuis userParams()
    const { id } = useParams();
+   // Data Mocked ? Function Mocked : Sinon Function API
    const isDataMocked = true;
-
+   // Setup du Nom d'Utilisateur
    let definedID = "";
-
+   // Si ID undefined // Sinon "User" avec ID
    if (id == undefined) {
       definedID = "Default";
    } else if (isDataMocked) {
       const userData = getMainData(id);
-      // console.log(userData);
       const userFirstName = userData.userInfos.firstName;
       definedID = userFirstName;
    } // else if (!isDataMocked) {

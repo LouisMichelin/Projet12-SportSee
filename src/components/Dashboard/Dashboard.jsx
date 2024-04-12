@@ -1,7 +1,7 @@
 import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
 import Daily from "../Daily/Daily.jsx";
-// import Sessions from "../Sessions/Sessions.jsx";
+import Sessions from "../Sessions/Sessions.jsx";
 // import Performances from "../Performances/Performances.jsx";
 // import Score from "../Score/Score.jsx";
 
@@ -13,7 +13,7 @@ function Dashboard() {
             <div style={{ display: "flex", flexDirection: "column" }}>
                <Daily />
                <div className="DashboardDetails">
-                  {/* <Sessions /> */}
+                  <Sessions />
                   {/* <Performances /> */}
                   {/* <Score /> */}
                </div>

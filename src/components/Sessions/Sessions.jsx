@@ -1,5 +1,4 @@
 import "./Sessions.scss";
-import { getAverageData } from "../../services/APIservices";
 import {
    LineChart,
    Line,
@@ -10,30 +9,72 @@ import {
    Legend,
    ResponsiveContainer,
 } from "recharts";
-
-let userId = 12;
+import { getAverageData } from "../../services/APIservices";
+import { useParams } from "react-router-dom";
 
 function Sessions() {
-   // Si la sessionStorage est null alors on appelle la fonction API getAverageData()
-   if (sessionStorage.getItem("averageData") == null) {
-      getAverageData(userId);
-   }
-   const averageData = JSON.parse(sessionStorage.getItem("averageData"));
-   if (averageData.data.id != userId) {
-      getAverageData(userId);
-   }
-   // Utilisation des Data "fetched"
-   const sessionsData = averageData.data.sessions;
-   const sessionsArray = [];
+   // ID depuis userParams()
+   const { id } = useParams();
+   // Function API
+   const userData = getAverageData(id);
+   // Array des données affichées
+   let graphData = [];
+   // Valeurs pour "Default User"
+   let defaultValues = [
+      {
+         day: 1,
+         sessionLength: 10,
+      },
+      {
+         day: 2,
+         sessionLength: 20,
+      },
+      {
+         day: 3,
+         sessionLength: 30,
+      },
+      {
+         day: 4,
+         sessionLength: 40,
+      },
+      {
+         day: 5,
+         sessionLength: 50,
+      },
+      {
+         day: 6,
+         sessionLength: 60,
+      },
+      {
+         day: 7,
+         sessionLength: 70,
+      },
+   ];
+   // Data Jours de la semaine
    const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
-   sessionsData.forEach((element, index) => {
-      sessionsArray.push({
-         // PUSH de chaque SESSION dans sessionsArray[]
-         day: weeklyDays[index],
-         length: element.sessionLength,
+
+   // Si "Default User" // Sinon "User" avec ID connu
+   if (id == undefined) {
+      defaultValues.forEach((element, index) => {
+         graphData.push({
+            day: weeklyDays[index],
+            length: element.sessionLength,
+         });
       });
-   });
-   // -------------------------------------------------------------------------------
+   } else if (id) {
+      const userSessions = userData.sessions;
+
+      // Utilisation des Données-Utilisateur
+      userSessions.forEach((element, index) => {
+         graphData.push({
+            day: weeklyDays[index],
+            length: element.sessionLength,
+         });
+      });
+      console.log(graphData);
+   }
+
+   // // CUSTOMIZED AXE ABSCISSES
    const CustomizedAxisTickX = ({ x, y, payload }) => {
       return (
          <g transform={`translate(${x},${y})`}>
@@ -79,7 +120,7 @@ function Sessions() {
             <LineChart
                // width={260}
                // height={240}
-               data={sessionsArray}
+               data={graphData}
                margin={{
                   top: 5,
                   right: 15,

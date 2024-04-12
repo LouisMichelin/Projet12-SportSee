@@ -14,8 +14,11 @@ import { getActivityData } from "../../services/APIservices";
 import { useParams } from "react-router-dom";
 
 function Daily() {
+   // ID depuis userParams()
    const { id } = useParams();
+   // Function API
    const userData = getActivityData(id);
+   // Array des données affichées
    let graphData = [];
    // Valeurs pour "Default User"
    let defaultValues = [
@@ -55,7 +58,7 @@ function Daily() {
          calories: 700,
       },
    ];
-   // Si "Default User" // Si "User" avec ID connu
+   // Si "Default User" // Sinon "User" avec ID connu
    if (id == undefined) {
       defaultValues.forEach((element, index) => {
          graphData.push({
@@ -69,7 +72,6 @@ function Daily() {
       // Utilisation des Données-Utilisateur
       userSessions.forEach((element, index) => {
          graphData.push({
-            // PUSH de chaque SESSION dans graphData[]
             day: [index + 1],
             poids: element.kilogram,
             calories: element.calories,
