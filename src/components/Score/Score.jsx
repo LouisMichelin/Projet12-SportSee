@@ -1,22 +1,16 @@
 import "./Score.scss";
 import { getMainData } from "../../services/APIservices";
-import React, { PureComponent } from "react";
+// import React, { PureComponent } from "react";
 import {
    RadialBarChart,
    RadialBar,
    Legend,
    ResponsiveContainer,
+   PolarAngleAxis,
 } from "recharts";
+import { useParams } from "react-router-dom";
 
-let userId = 12;
-const data = [
-   {
-      name: `${12}% de votre objectif`,
-      uv: 3.47,
-      pv: 240,
-      fill: "#8884d8",
-   },
-];
+// Style du Radial Chart
 const style = {
    top: "50%",
    right: 0,
@@ -25,28 +19,44 @@ const style = {
 };
 
 function Score() {
+   // ID depuis userParams()
+   const { id } = useParams();
+   // Function API
+   const userData = getMainData(id);
+   // Valeurs pour "Default User"
+   const defaultValues = { score: 0.42 };
+   let userTodayScore;
+   // Si "Default User" // Sinon "User" avec ID connu
+   if (id == undefined) {
+      userTodayScore = defaultValues.score;
+   } else if (id) {
+      userTodayScore = userData.todayScore;
+   } // else if (!isDataMocked) {}
+
+   // Array des données affichées
+   const graphData = [
+      {
+         name: `${userTodayScore * 100}% de votre objectif`,
+         uv: userTodayScore,
+         fill: "#FF0000",
+      },
+   ];
+
    return (
       <div className="ScoreWrapper">
          <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart
-               cx="50%"
-               cy="50%"
+               startAngle={90}
+               endAngle={450}
                innerRadius="75%"
-               // outerRadius="80%"
-               barSize={50}
-               data={data}
+               data={graphData}
             >
-               <RadialBar
-                  // minAngle={225}
-                  // label={{ position: "insideStart", fill: "#fff" }}
-                  // background
-                  // clockWise
-                  dataKey="pv"
-               />
+               <RadialBar dataKey="uv" />
+               <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
                <Legend
-                  // iconSize={100}
-                  // layout="vertical"
+                  iconSize={0}
                   verticalAlign="middle"
+                  align="center"
                   wrapperStyle={style}
                />
             </RadialBarChart>

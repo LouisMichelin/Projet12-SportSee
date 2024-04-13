@@ -1,6 +1,6 @@
 import "./Performances.scss";
 import { getPerformanceData } from "../../services/APIservices";
-import React, { PureComponent } from "react";
+// import React, { PureComponent } from "react";
 import {
    Radar,
    RadarChart,
@@ -45,7 +45,7 @@ function Performances() {
          intensity: 120,
       },
    ];
-
+   // Si "Default User" // Sinon "User" avec ID connu
    if (id == undefined) {
       defaultValues.forEach((element, index) => {
          graphData.push({
