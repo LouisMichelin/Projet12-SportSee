@@ -22,67 +22,55 @@ function Performances() {
    const defaultValues = [
       {
          subject: "Intensité",
-         A: 10,
-         B: 10,
-         fullMark: 20,
+         intensity: 20,
       },
       {
          subject: "Vitesse",
-         A: 20,
-         B: 20,
-         fullMark: 40,
+         intensity: 40,
       },
       {
          subject: "Force",
-         A: 30,
-         B: 30,
-         fullMark: 60,
+         intensity: 60,
       },
       {
          subject: "Endurance",
-         A: 40,
-         B: 40,
-         fullMark: 80,
+         intensity: 80,
       },
       {
          subject: "Energie",
-         A: 50,
-         B: 50,
-         fullMark: 100,
+         intensity: 100,
       },
       {
          subject: "Cardio",
-         A: 60,
-         B: 60,
-         fullMark: 120,
+         intensity: 120,
       },
    ];
 
-   // else if (!isDataMocked) {}
+   if (id == undefined) {
+      defaultValues.forEach((element, index) => {
+         graphData.push({
+            subject: element.subject,
+            intensity: element.intensity,
+         });
+      });
+   } else if (id) {
+      userData.data.forEach((element, index) => {
+         graphData.push({
+            subject: userData.kind[index + 1],
+            intensity: element.value,
+         });
+      });
+   } // else if (!isDataMocked) {}
 
    return (
       <div className="PerformancesWrapper">
-         {/* <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-               <PolarGrid innerRadius={0} radialLines={false} />
-
-               <PolarAngleAxis
-                  dataKey="subject"
-                  // axisLine="false"
-                  // tickLine="false"
-               />
-               <Radar
-                  // dot={false}
-                  // name="Mike"
-                  dataKey="A"
-                  // stroke="#8884d8"
-                  fill="#FF0101B2"
-                  // fillOpacity={0.7}
-                  // legendType="none"
-               />
+         <ResponsiveContainer width="100%" height="100%">
+            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={graphData}>
+               <PolarGrid radialLines={false} />
+               <PolarAngleAxis dataKey="subject" fontSize={12} />
+               <Radar name="Mike" dataKey="intensity" fill="#FF0101B2" />
             </RadarChart>
-         </ResponsiveContainer> */}
-         1337
+         </ResponsiveContainer>
       </div>
    );
 }
