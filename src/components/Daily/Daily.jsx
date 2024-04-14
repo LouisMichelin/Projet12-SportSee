@@ -114,7 +114,7 @@ function Daily({ useParamID }) {
                      fill: "#9B9EAC",
                   }}
                   dx={25}
-                  domain={["dataMin - 1", "dataMax + 1"]}
+                  domain={["dataMin -1", "dataMax +2"]}
                   interval={1}
                />
                {/*CALORIES*/}
