@@ -24,6 +24,7 @@ function Dashboard() {
                <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}
+                  category={"calorieCount"}
                />
                <Scientifics
                   imageSrc={"src/assets/protein-icon.png"}

@@ -2,7 +2,7 @@ import "./Scientifics.scss";
 import { getMainData } from "../../services/APIservices";
 import { useParams } from "react-router-dom";
 
-function Scientifics({ imageSrc, imageAlt }) {
+function Scientifics({ imageSrc, imageAlt, category }) {
    // ID depuis userParams()
    const { id } = useParams();
    // Function API
@@ -10,29 +10,29 @@ function Scientifics({ imageSrc, imageAlt }) {
    // Valeurs pour "Default User"
    const defaultValues = {
       keyData: {
-         calorieCount: 1930,
-         proteinCount: 155,
-         carbohydrateCount: 290,
-         lipidCount: 50,
+         calorieCount: 1337,
+         proteinCount: 123,
+         carbohydrateCount: 555,
+         lipidCount: 42,
       },
    };
-
-   // Array des données affichées
-   const graphData = [];
-
+   let displayedData;
    // Si "Default User" // Sinon "User" avec ID connu
    if (id == undefined) {
-      graphData.push(defaultValues.keyData);
-      console.log(graphData);
+      displayedData = defaultValues.keyData;
    } else if (id) {
+      displayedData = userData.keyData;
       // userTodayScore = userData.todayScore;
    } // else if (!isDataMocked) {}
 
+   // FAIRE UN .MAP / .FOREACH DEPUIS <DASHBOARD /> pour simplifier
    return (
       <div className="ScientificWrapper">
          <img src={imageSrc} alt={imageAlt} />
          <div className="ScientificTitleWrapper">
-            <div className="ScientificTitle">2,000kCal</div>
+            <div className="ScientificTitle">
+               {displayedData.calorieCount + "kCal"}
+            </div>
             <div className="ScientificDescription">calories</div>
          </div>
       </div>
