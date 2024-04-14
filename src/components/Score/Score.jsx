@@ -1,6 +1,5 @@
 import "./Score.scss";
 import { getMainData } from "../../services/APIservices";
-// import React, { PureComponent } from "react";
 import {
    PieChart,
    RadialBarChart,
@@ -10,6 +9,7 @@ import {
    ResponsiveContainer,
    PolarAngleAxis,
    Label,
+   Cell,
 } from "recharts";
 
 // // Style du Radial Chart
@@ -35,37 +35,23 @@ function Score({ useParamID }) {
    return (
       <div className="ScoreWrapper">
          <div>{userScore}</div>
-
-         <ResponsiveContainer width="100%" height="100%">
-            <RadialBarChart
-               startAngle={90}
-               endAngle={450}
-               innerRadius="75%"
-               data={graphData}
-            >
-               <RadialBar dataKey="uv" />
-               <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
-               <Legend
-                  iconSize={0}
-                  verticalAlign="middle"
-                  align="center"
-                  wrapperStyle={style}
-               />
-               <Label></Label>
-            </RadialBarChart>
-         </ResponsiveContainer>
-
-         {/* <PieChart width={230} height={170}>
+         <PieChart width={230} height={170}>
             <Pie
+               domain={[0, 360]}
+               isAnimationActive={false}
+               // data={data01}
+
+               fill="#8884d8"
                startAngle={-270}
-               data={graphData}
+               minAngle={0}
+               // dataKey={graphData}
                cx="50%"
                cy="50%"
                dataKey="value"
                innerRadius={70}
                outerRadius={80}
             >
-               {data.map((entry, index) => {
+               {graphData.map((entry, index) => {
                   if (index === 1) {
                      return (
                         <Cell
@@ -88,9 +74,29 @@ function Score({ useParamID }) {
                />
             </Pie>
          </PieChart>
-         <div className="txt-pourc">de votre objectif</div> */}
+         <div className="txt-pourc">de votre objectif</div>
       </div>
    );
 }
 
 export default Score;
+
+// OLD RADIALBAL CHART
+/* <ResponsiveContainer width="100%" height="100%">
+            <RadialBarChart
+               startAngle={90}
+               endAngle={450}
+               innerRadius="75%"
+               data={graphData}
+            >
+               <RadialBar dataKey="uv" />
+               <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
+               <Legend
+                  iconSize={0}
+                  verticalAlign="middle"
+                  align="center"
+                  wrapperStyle={style}
+               />
+               <Label></Label>
+            </RadialBarChart>
+         </ResponsiveContainer> */
