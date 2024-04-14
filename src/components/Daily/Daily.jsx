@@ -65,7 +65,7 @@ function Daily({ useParamID }) {
    let graphData = [];
    userData.forEach((element, index) => {
       graphData.push({
-         day: index + 1, // GENERER UN INDEX === à N+1 (Jours 1-7 et non pas 0-6)
+         day: index + 1, // (Jours 1-7 et non pas 0-6)
          kilogram: element.kilogram,
          calories: element.calories,
       });

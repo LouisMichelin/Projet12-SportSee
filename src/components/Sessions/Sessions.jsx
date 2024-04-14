@@ -1,20 +1,23 @@
 import "./Sessions.scss";
-import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+   LineChart,
+   Line,
+   XAxis,
+   YAxis,
+   Tooltip,
+   ResponsiveContainer,
+} from "recharts";
 import { getAverageData } from "../../services/APIservices";
 
 function Sessions({ useParamID }) {
-   const userData = getAverageData(useParamID);
+   const userData = getAverageData(useParamID).sessions;
 
-   // Array des données affichées
-   // let graphData = [];
+   let graphData = [];
+   const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
 
-   // Data Jours de la semaine
-   // const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
-
-   const userSessions = userData.sessions;
-   userSessions.forEach((element, index) => {
+   userData.forEach((element, index) => {
       graphData.push({
-         day: weeklyDays[index],
+         day: weeklyDays[index], // (Jours L, M, [...] jusqu'à D)
          duree: element.sessionLength,
       });
    });
@@ -86,6 +89,7 @@ function Sessions({ useParamID }) {
                      fill: "#ffffff",
                   }}
                />
+               <YAxis domain={["dataMin - 1", "dataMax + 1"]} hide />
                <Tooltip content={CustomTooltip} />
                <Line
                   type="monotone"

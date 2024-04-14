@@ -3,7 +3,7 @@ import { getMainData } from "../../services/APIservices";
 // import React, { PureComponent } from "react";
 import {
    PieChart,
-   // RadialBarChart,
+   RadialBarChart,
    Pie,
    RadialBar,
    Legend,
@@ -12,7 +12,7 @@ import {
    Label,
 } from "recharts";
 
-// Style du Radial Chart
+// // Style du Radial Chart
 const style = {
    top: "50%",
    right: 0,
@@ -22,28 +22,21 @@ const style = {
 
 function Score({ useParamID }) {
    const userData = getMainData(useParamID);
-   // Valeurs pour "Default User"
-   const defaultValues = { score: 0.42 };
-   let userTodayScore;
-   // Si "Default User" // Sinon "User" avec ID connu
-   if (id == undefined) {
-      userTodayScore = defaultValues.score;
-   } else if (id) {
-      userTodayScore = userData.todayScore;
-   } // else if (!isDataMocked) {}
+   const userScore = userData.score ? userData.score : userData.todayScore;
 
-   // Array des données affichées
    const graphData = [
       {
-         name: `${userTodayScore * 100}% de votre objectif`,
-         uv: userTodayScore,
+         name: `${userScore * 100}% de votre objectif`,
+         uv: userScore,
          fill: "#FF0000",
       },
    ];
 
    return (
       <div className="ScoreWrapper">
-         {/* <ResponsiveContainer width="100%" height="100%">
+         <div>{userScore}</div>
+
+         <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart
                startAngle={90}
                endAngle={450}
@@ -60,8 +53,9 @@ function Score({ useParamID }) {
                />
                <Label></Label>
             </RadialBarChart>
-         </ResponsiveContainer> */}
-         <PieChart width={230} height={170}>
+         </ResponsiveContainer>
+
+         {/* <PieChart width={230} height={170}>
             <Pie
                startAngle={-270}
                data={graphData}
@@ -94,7 +88,7 @@ function Score({ useParamID }) {
                />
             </Pie>
          </PieChart>
-         <div className="txt-pourc">de vorte objectif</div>
+         <div className="txt-pourc">de votre objectif</div> */}
       </div>
    );
 }
