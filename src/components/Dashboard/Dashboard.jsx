@@ -5,6 +5,7 @@ import Sessions from "../Sessions/Sessions.jsx";
 import Performances from "../Performances/Performances.jsx";
 import Score from "../Score/Score.jsx";
 import Scientifics from "../Scientifics/Scientifics.jsx";
+// import { USER_MAIN_DATA } from "../../../P9-front-end-dashboard/app/data.js";
 
 function Dashboard() {
    return (
@@ -20,7 +21,6 @@ function Dashboard() {
                </div>
             </div>
             <div className="DashboardScientificValues">
-               {/* <div>CECI SERA UN .MAP()</div> */}
                <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}

@@ -5,7 +5,6 @@ import {
    ResponsiveContainer,
    BarChart,
    Bar,
-   // ReferenceLine,
    XAxis,
    YAxis,
    CartesianGrid,
@@ -18,65 +17,7 @@ function Daily() {
    const { id } = useParams();
    // Function API
    const userData = getActivityData(id);
-   // Array des données affichées
-   let graphData = [];
-   // Valeurs pour "Default User"
-   let defaultValues = [
-      {
-         day: "2024-01-01",
-         kilogram: 90,
-         calories: 100,
-      },
-      {
-         day: "2024-01-02",
-         kilogram: 80,
-         calories: 200,
-      },
-      {
-         day: "2024-01-03",
-         kilogram: 70,
-         calories: 300,
-      },
-      {
-         day: "2024-01-04",
-         kilogram: 60,
-         calories: 400,
-      },
-      {
-         day: "2024-01-05",
-         kilogram: 55,
-         calories: 500,
-      },
-      {
-         day: "2024-01-06",
-         kilogram: 50,
-         calories: 600,
-      },
-      {
-         day: "2024-01-07",
-         kilogram: 45,
-         calories: 700,
-      },
-   ];
-   // Si "Default User" // Sinon "User" avec ID connu
-   if (id == undefined) {
-      defaultValues.forEach((element, index) => {
-         graphData.push({
-            day: [index + 1],
-            poids: element.kilogram,
-            calories: element.calories,
-         });
-      });
-   } else if (id) {
-      const userSessions = userData.sessions;
-      userSessions.forEach((element, index) => {
-         graphData.push({
-            day: [index + 1],
-            poids: element.kilogram,
-            calories: element.calories,
-         });
-      });
-   }
+   const userSessions = userData.sessions;
 
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
@@ -133,7 +74,7 @@ function Daily() {
          <div className="DailyTitle">Activité quotidienne</div>
          <ResponsiveContainer width="100%" height="100%">
             <BarChart
-               data={graphData}
+               data={userSessions}
                margin={{
                   top: 30,
                   right: 10,
@@ -165,15 +106,14 @@ function Daily() {
                   orientation="right"
                   axisLine={false}
                   tickLine={false}
-                  // interval={1}
                   style={{
                      fontWeight: "600",
                      fontSize: "14px",
                      fill: "#9B9EAC",
                   }}
                   dx={25}
-                  domain={["auto", "auto"]}
-                  tickCount={3}
+                  domain={["dataMin - 1", "dataMax + 1"]}
+                  interval={1}
                />
                {/*CALORIES*/}
                <YAxis
@@ -190,7 +130,7 @@ function Daily() {
                <Legend verticalAlign="top" content={RenderCustomizedLegend} />
                <Bar
                   yAxisId="right"
-                  dataKey="poids"
+                  dataKey="kilogram"
                   fill="black"
                   radius={[4.5, 4.5, 0, 0]}
                />

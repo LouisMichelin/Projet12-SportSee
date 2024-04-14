@@ -7,6 +7,7 @@ import {
    Legend,
    ResponsiveContainer,
    PolarAngleAxis,
+   Label,
 } from "recharts";
 import { useParams } from "react-router-dom";
 
@@ -59,6 +60,7 @@ function Score() {
                   align="center"
                   wrapperStyle={style}
                />
+               <Label></Label>
             </RadialBarChart>
          </ResponsiveContainer>
       </div>

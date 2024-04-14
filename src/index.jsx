@@ -7,10 +7,6 @@ import Header from "./components/Header/Header.jsx";
 
 const router = createBrowserRouter([
    {
-      path: "/",
-      element: <App />,
-   },
-   {
       path: "/:id",
       element: <App />,
    },
