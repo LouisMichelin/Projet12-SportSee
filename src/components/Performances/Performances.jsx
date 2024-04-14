@@ -9,13 +9,10 @@ import {
    PolarRadiusAxis,
    ResponsiveContainer,
 } from "recharts";
-import { useParams } from "react-router-dom";
 
-function Performances() {
-   // ID depuis userParams()
-   const { id } = useParams();
+function Performances({ useParamID }) {
    // Function API
-   const userData = getPerformanceData(id);
+   const userData = getPerformanceData(useParamID);
    // Array des données affichées
    let graphData = [];
    // Valeurs pour "Default User"

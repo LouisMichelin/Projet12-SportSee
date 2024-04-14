@@ -1,12 +1,9 @@
 import "./Scientifics.scss";
 import { getMainData } from "../../services/APIservices";
-import { useParams } from "react-router-dom";
 
-function Scientifics({ imageSrc, imageAlt, category }) {
-   // ID depuis userParams()
-   const { id } = useParams();
+function Scientifics({ useParamID, imageSrc, imageAlt, category }) {
    // Function API
-   const userData = getMainData(id);
+   const userData = getMainData(useParamID);
    // Valeurs pour "Default User"
    const defaultValues = {
       keyData: {

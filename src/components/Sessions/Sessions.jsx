@@ -1,65 +1,23 @@
 import "./Sessions.scss";
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { getAverageData } from "../../services/APIservices";
-import { useParams } from "react-router-dom";
 
-function Sessions() {
-   // ID depuis userParams()
-   const { id } = useParams();
-   // Function API
-   const userData = getAverageData(id);
+function Sessions({ useParamID }) {
+   const userData = getAverageData(useParamID);
+
    // Array des données affichées
-   let graphData = [];
-   // Valeurs pour "Default User"
-   let defaultValues = [
-      {
-         day: 1,
-         sessionLength: 10,
-      },
-      {
-         day: 2,
-         sessionLength: 20,
-      },
-      {
-         day: 3,
-         sessionLength: 30,
-      },
-      {
-         day: 4,
-         sessionLength: 40,
-      },
-      {
-         day: 5,
-         sessionLength: 50,
-      },
-      {
-         day: 6,
-         sessionLength: 60,
-      },
-      {
-         day: 7,
-         sessionLength: 70,
-      },
-   ];
+   // let graphData = [];
+
    // Data Jours de la semaine
-   const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
-   // Si "Default User" // Sinon "User" avec ID connu
-   if (id == undefined) {
-      defaultValues.forEach((element, index) => {
-         graphData.push({
-            day: weeklyDays[index],
-            duree: element.sessionLength,
-         });
+   // const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
+
+   const userSessions = userData.sessions;
+   userSessions.forEach((element, index) => {
+      graphData.push({
+         day: weeklyDays[index],
+         duree: element.sessionLength,
       });
-   } else if (id) {
-      const userSessions = userData.sessions;
-      userSessions.forEach((element, index) => {
-         graphData.push({
-            day: weeklyDays[index],
-            duree: element.sessionLength,
-         });
-      });
-   } // else if (!isDataMocked) {}
+   });
 
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {

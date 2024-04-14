@@ -11,7 +11,6 @@ import {
    PolarAngleAxis,
    Label,
 } from "recharts";
-import { useParams } from "react-router-dom";
 
 // Style du Radial Chart
 const style = {
@@ -21,11 +20,8 @@ const style = {
    lineHeight: "24px",
 };
 
-function Score() {
-   // ID depuis userParams()
-   const { id } = useParams();
-   // Function API
-   const userData = getMainData(id);
+function Score({ useParamID }) {
+   const userData = getMainData(useParamID);
    // Valeurs pour "Default User"
    const defaultValues = { score: 0.42 };
    let userTodayScore;

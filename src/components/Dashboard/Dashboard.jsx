@@ -1,7 +1,7 @@
 import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
-// import Daily from "../Daily/Daily.jsx";
-// import Sessions from "../Sessions/Sessions.jsx";
+import Daily from "../Daily/Daily.jsx";
+import Sessions from "../Sessions/Sessions.jsx";
 // import Performances from "../Performances/Performances.jsx";
 // import Score from "../Score/Score.jsx";
 // import Scientifics from "../Scientifics/Scientifics.jsx";
@@ -9,8 +9,7 @@ import Welcome from "../Welcome/Welcome";
 import { useParams } from "react-router-dom";
 
 function Dashboard() {
-   // ID depuis userParams()
-   const { id } = useParams();
+   const { id } = useParams(); // ID depuis useParams()
 
    return (
       <div className="DashboardWrapper">
@@ -19,29 +18,32 @@ function Dashboard() {
             <div style={{ display: "flex", flexDirection: "column" }}>
                <Daily useParamID={id} />
                <div className="DashboardDetails">
-                  {/* <Sessions /> */}
-                  {/* <Performances /> */}
-                  {/* <Score /> */}
+                  <Sessions useParamID={id} />
+                  {/* <Performances useParamID={id}/> */}
+                  {/* <Score useParamID={id}/> */}
                </div>
             </div>
             <div className="DashboardScientificValues">
-               1337
                {/* <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}
                   category={"calorieCount"}
+                  useParamID={id}
                />
                <Scientifics
                   imageSrc={"src/assets/protein-icon.png"}
                   imageAlt={"Icone des protéines"}
+                  useParamID={id}
                />
                <Scientifics
                   imageSrc={"src/assets/carbs-icon.png"}
                   imageAlt={"Icone des glucides"}
+                  useParamID={id}
                />
                <Scientifics
                   imageSrc={"src/assets/fat-icon.png"}
                   imageAlt={"Icone des graisses"}
+                  useParamID={id}
                /> */}
             </div>
          </div>

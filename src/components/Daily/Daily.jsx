@@ -10,15 +10,9 @@ import {
    CartesianGrid,
 } from "recharts";
 import { getActivityData } from "../../services/APIservices";
-import { useParams } from "react-router-dom";
 
-function Daily() {
-   // ID depuis userParams()
-   const { id } = useParams();
-   // Function API
-   const userData = getActivityData(id);
-   const userSessions = userData.sessions;
-
+function Daily({ useParamID }) {
+   const userData = getActivityData(useParamID).sessions;
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
       if (active && payload && payload.length) {
@@ -68,13 +62,21 @@ function Daily() {
          </div>
       );
    };
+   let graphData = [];
+   userData.forEach((element, index) => {
+      graphData.push({
+         day: index + 1, // GENERER UN INDEX === à N+1 (Jours 1-7 et non pas 0-6)
+         kilogram: element.kilogram,
+         calories: element.calories,
+      });
+   });
 
    return (
       <div className="DailyWrapper">
          <div className="DailyTitle">Activité quotidienne</div>
          <ResponsiveContainer width="100%" height="100%">
             <BarChart
-               data={userSessions}
+               data={graphData}
                margin={{
                   top: 30,
                   right: 10,
@@ -123,17 +125,21 @@ function Daily() {
                   tickLine={false}
                   hide
                />
+               {/*TOOLTIP (Hovering Data)*/}
                <Tooltip
                   content={CustomTooltip}
                   cursor={{ fill: "#C4C4C480" }}
                />
+               {/*LEGEND*/}
                <Legend verticalAlign="top" content={RenderCustomizedLegend} />
+               {/*BAR: KILOS*/}
                <Bar
                   yAxisId="right"
                   dataKey="kilogram"
                   fill="black"
                   radius={[4.5, 4.5, 0, 0]}
                />
+               {/*BAR: CALORIES*/}
                <Bar
                   yAxisId="left"
                   dataKey="calories"
