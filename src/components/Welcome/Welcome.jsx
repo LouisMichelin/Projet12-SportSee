@@ -1,32 +1,15 @@
 import "./Welcome.scss";
 import { getMainData } from "../../services/APIservices";
-import { useParams } from "react-router-dom";
 
-function Welcome() {
-   // ID depuis userParams()
-   const { id } = useParams();
-   // Data Mocked ? Function Mocked : Sinon Function API
-   const isDataMocked = true;
-   // Setup du Nom d'Utilisateur
-   let definedID = "";
-   // Si ID undefined // Sinon "User" avec ID
-   if (id == undefined) {
-      definedID = "Default";
-   } else if (isDataMocked) {
-      const userData = getMainData(id);
-      const userFirstName = userData.userInfos.firstName;
-      definedID = userFirstName;
-   } // else if (!isDataMocked) {
-   //    const fetchedFirstNameAPI = getMainData(id);
-   //    definedID = fetchedFirstNameAPI;
-   // }
+function Welcome({ useParamID }) {
+   const userData = getMainData(useParamID).userInfos.firstName; // ID depuis userParams()
 
    return (
       <div className="WelcomeWrapper">
          <div className="WelcomeMessage">
             Bonjour&nbsp;
             <span id="WelcomeName" style={{ color: "#FF0101" }}>
-               {definedID}
+               {userData}
             </span>
          </div>
          <div className="WelcomeMessageCongrats">

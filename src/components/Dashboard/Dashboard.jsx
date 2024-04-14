@@ -1,27 +1,32 @@
 import "./Dashboard.scss";
 import Welcome from "../Welcome/Welcome";
-import Daily from "../Daily/Daily.jsx";
-import Sessions from "../Sessions/Sessions.jsx";
-import Performances from "../Performances/Performances.jsx";
-import Score from "../Score/Score.jsx";
-import Scientifics from "../Scientifics/Scientifics.jsx";
+// import Daily from "../Daily/Daily.jsx";
+// import Sessions from "../Sessions/Sessions.jsx";
+// import Performances from "../Performances/Performances.jsx";
+// import Score from "../Score/Score.jsx";
+// import Scientifics from "../Scientifics/Scientifics.jsx";
 // import { USER_MAIN_DATA } from "../../../P9-front-end-dashboard/app/data.js";
+import { useParams } from "react-router-dom";
 
 function Dashboard() {
+   // ID depuis userParams()
+   const { id } = useParams();
+
    return (
       <div className="DashboardWrapper">
-         <Welcome />
+         <Welcome useParamID={id} />
          <div className="DashboardSecondWrapper">
             <div style={{ display: "flex", flexDirection: "column" }}>
-               <Daily />
+               <Daily useParamID={id} />
                <div className="DashboardDetails">
-                  <Sessions />
-                  <Performances />
-                  <Score />
+                  {/* <Sessions /> */}
+                  {/* <Performances /> */}
+                  {/* <Score /> */}
                </div>
             </div>
             <div className="DashboardScientificValues">
-               <Scientifics
+               1337
+               {/* <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}
                   category={"calorieCount"}
@@ -37,7 +42,7 @@ function Dashboard() {
                <Scientifics
                   imageSrc={"src/assets/fat-icon.png"}
                   imageAlt={"Icone des graisses"}
-               />
+               /> */}
             </div>
          </div>
       </div>

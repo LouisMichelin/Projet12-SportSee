@@ -2,7 +2,9 @@ import "./Score.scss";
 import { getMainData } from "../../services/APIservices";
 // import React, { PureComponent } from "react";
 import {
-   RadialBarChart,
+   PieChart,
+   // RadialBarChart,
+   Pie,
    RadialBar,
    Legend,
    ResponsiveContainer,
@@ -45,7 +47,7 @@ function Score() {
 
    return (
       <div className="ScoreWrapper">
-         <ResponsiveContainer width="100%" height="100%">
+         {/* <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart
                startAngle={90}
                endAngle={450}
@@ -62,7 +64,41 @@ function Score() {
                />
                <Label></Label>
             </RadialBarChart>
-         </ResponsiveContainer>
+         </ResponsiveContainer> */}
+         <PieChart width={230} height={170}>
+            <Pie
+               startAngle={-270}
+               data={graphData}
+               cx="50%"
+               cy="50%"
+               dataKey="value"
+               innerRadius={70}
+               outerRadius={80}
+            >
+               {data.map((entry, index) => {
+                  if (index === 1) {
+                     return (
+                        <Cell
+                           key={`cell-${index}`}
+                           radius={[10, 10, 10, 10]}
+                           fill="#f3f6f9"
+                        />
+                     );
+                  }
+                  return <Cell key={`cell-${index}`} fill="red" />;
+               })}
+               <Label
+                  value={graphData[0].value + "%"}
+                  position="center"
+                  fill="black"
+                  style={{
+                     fontSize: "25px",
+                     fontWeight: "bold",
+                  }}
+               />
+            </Pie>
+         </PieChart>
+         <div className="txt-pourc">de vorte objectif</div>
       </div>
    );
 }
