@@ -4,6 +4,7 @@ import Daily from "../Daily/Daily.jsx";
 import Sessions from "../Sessions/Sessions.jsx";
 import Performances from "../Performances/Performances.jsx";
 import Score from "../Score/Score.jsx";
+import Scientifics from "../Scientifics/Scientifics.jsx";
 
 function Dashboard() {
    return (
@@ -20,10 +21,22 @@ function Dashboard() {
             </div>
             <div className="DashboardScientificValues">
                {/* <div>CECI SERA UN .MAP()</div> */}
-               <div>1</div>
-               <div>2</div>
-               <div>3</div>
-               <div>4</div>
+               <Scientifics
+                  imageSrc={"src/assets/calories-icon.png"}
+                  imageAlt={"Icone des calories"}
+               />
+               <Scientifics
+                  imageSrc={"src/assets/protein-icon.png"}
+                  imageAlt={"Icone des protéines"}
+               />
+               <Scientifics
+                  imageSrc={"src/assets/carbs-icon.png"}
+                  imageAlt={"Icone des glucides"}
+               />
+               <Scientifics
+                  imageSrc={"src/assets/fat-icon.png"}
+                  imageAlt={"Icone des graisses"}
+               />
             </div>
          </div>
       </div>

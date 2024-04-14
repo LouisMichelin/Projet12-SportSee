@@ -1,0 +1,28 @@
+.ScientificWrapper {
+   width: 175px;
+   height: 125px;
+   background-color: #fbfbfb;
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   @media (min-width: 1400px) {
+      width: 260px;
+   }
+}
+.ScientificWrapper img {
+   width: 60px;
+   height: 60px;
+}
+
+// .ScientificTitleWrapper {
+// }
+
+.ScientificTitle {
+   font-weight: 700;
+   font-size: 20px;
+}
+.ScientificDescription {
+   color: #74798c;
+   font-size: 14px;
+   font-weight: 500;
+}
