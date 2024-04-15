@@ -4,7 +4,7 @@ import Daily from "../Daily/Daily.jsx";
 import Sessions from "../Sessions/Sessions.jsx";
 import Performances from "../Performances/Performances.jsx";
 import Score from "../Score/Score.jsx";
-// import Scientifics from "../Scientifics/Scientifics.jsx";
+import Scientifics from "../Scientifics/Scientifics.jsx";
 // import { USER_MAIN_DATA } from "../../../P9-front-end-dashboard/app/data.js";
 import { useParams } from "react-router-dom";
 
@@ -24,27 +24,30 @@ function Dashboard() {
                </div>
             </div>
             <div className="DashboardScientificValues">
-               {/* <Scientifics
+               <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}
-                  category={"calorieCount"}
                   useParamID={id}
+                  category={"calorieCount"}
                />
                <Scientifics
                   imageSrc={"src/assets/protein-icon.png"}
                   imageAlt={"Icone des protéines"}
                   useParamID={id}
+                  category={"proteinCount"}
                />
                <Scientifics
                   imageSrc={"src/assets/carbs-icon.png"}
                   imageAlt={"Icone des glucides"}
                   useParamID={id}
+                  category={"carbohydrateCount"}
                />
                <Scientifics
                   imageSrc={"src/assets/fat-icon.png"}
                   imageAlt={"Icone des graisses"}
                   useParamID={id}
-               /> */}
+                  category={"lipidCount"}
+               />
             </div>
          </div>
       </div>

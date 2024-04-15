@@ -14,10 +14,11 @@ import {
 
 // // Style du Radial Chart
 const style = {
-   top: "50%",
-   right: 0,
-   transform: "translate(0, -50%)",
+   // top: "50%",
+   // right: 0,
+   // transform: "translate(0, -50%)",
    lineHeight: "24px",
+   width: "70px",
 };
 
 function Score({ useParamID }) {
@@ -91,6 +92,9 @@ function Score({ useParamID }) {
    // };
    return (
       <div className="ScoreWrapper">
+         <div style={{ position: "relative", left: "50%", width: "auto" }}>
+            Test
+         </div>
          <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart
                startAngle={90}
@@ -102,15 +106,6 @@ function Score({ useParamID }) {
             >
                <RadialBar dataKey="uv" cornerRadius={20} />
                <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
-               <Legend
-                  iconSize={0}
-                  verticalAlign="middle"
-                  align="center"
-                  wrapperStyle={style}
-                  width={100}
-                  right={100}
-               />
-               <Label></Label>
             </RadialBarChart>
          </ResponsiveContainer>
       </div>
