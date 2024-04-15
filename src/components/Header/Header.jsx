@@ -7,9 +7,7 @@ function Header() {
       <div className="HeaderWrapper">
          <img className="HeaderLogo" src={Sportsee} alt="Logo Sportsee" />
          <nav className="NavContainer">
-            <a className="NavLink Accueil" href="/">
-               Accueil
-            </a>
+            <a className="NavLink Accueil">Accueil</a>
             <div className="NavLink">
                <Profiles />
             </div>

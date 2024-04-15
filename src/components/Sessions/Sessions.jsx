@@ -54,8 +54,8 @@ function Sessions({ useParamID }) {
                data={graphData}
                margin={{
                   top: 20,
-                  // right: 20,
-                  // left: 20,
+                  // right: -10,
+                  left: -20,
                   bottom: 20,
                }}
             >
@@ -82,22 +82,25 @@ function Sessions({ useParamID }) {
                   tickLine={false}
                   axisLine={false}
                   dy={10}
-                  padding={{ left: 15, right: 15 }}
+                  padding={{ left: 20, right: 20 }}
                   style={{
-                     fontSize: "14px",
+                     fontSize: "12px",
                      opacity: "0.66",
                      fill: "#ffffff",
                   }}
+                  // allowDataOverflow
+                  includeHidden
+                  // domain={["dataMin", "dataMax"]}
                />
                <YAxis domain={["dataMin - 1", "dataMax + 1"]} hide />
-               <Tooltip content={CustomTooltip} />
+               <Tooltip content={CustomTooltip} cursor={false} />
                <Line
                   type="monotone"
                   dataKey="duree"
                   stroke="url(#colorUv)"
                   strokeOpacity={1} // OPACITY de la COURBE
                   strokeWidth={2}
-                  activeDot={{ r: 4 }}
+                  activeDot={{ r: 4, fill: "white" }}
                   dot={null}
                />
             </LineChart>
