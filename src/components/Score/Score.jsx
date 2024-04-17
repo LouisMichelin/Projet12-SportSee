@@ -67,11 +67,11 @@ function Score({ useParamID }) {
                data={graphData}
                // style={{ position: "absolute", width: "200px", height: "200px" }}
             >
-               <Legend
+               {/* <Legend
                   content={RenderCustomizedLegend}
                   // verticalAlign="middle"
                   // align="center"
-               />
+               /> */}
                <RadialBar
                   dataKey="uv"
                   cornerRadius={20}

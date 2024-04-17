@@ -14,15 +14,17 @@
    height: 60px;
 }
 
-// .ScientificTitleWrapper {
-// }
+.ScientificTitleWrapper {
+   width: 125px;
+}
 
 .ScientificTitle {
    font-weight: 700;
    font-size: 20px;
+   margin-bottom: 10px;
 }
 .ScientificDescription {
    color: #74798c;
    font-size: 14px;
-   font-weight: 500;
+   font-weight: 600;
 }
