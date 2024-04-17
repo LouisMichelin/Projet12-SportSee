@@ -39,15 +39,24 @@ function Score({ useParamID }) {
       return (
          <div className="legendWrapper">
             <div className="score">{userScore ? userScore * 100 : 0}%</div>
-            <p className="description">de votre objectif</p>
+            <div className="description">de votre objectif</div>
          </div>
       );
    };
 
    return (
       <div className="ScoreWrapper">
-         <ResponsiveContainer width="100%" height="100%">
+         <h3 className="ScoreTitle">Score</h3>
+         <ResponsiveContainer
+            width="100%"
+            height="100%"
+
+            // wrapperStyle={{ position: "relative" }}
+         >
             <RadialBarChart
+               width={730}
+               height={250}
+               // wrapperStyle={{ position: "absolute" }}
                startAngle={90}
                endAngle={450}
                // cx="50%"
@@ -56,11 +65,19 @@ function Score({ useParamID }) {
                innerRadius="80%"
                outerRadius="90%"
                data={graphData}
-               style={{ position: "absolute", width: "200px", height: "200px" }}
+               // style={{ position: "absolute", width: "200px", height: "200px" }}
             >
-               <RadialBar dataKey="uv" cornerRadius={20} />
+               <Legend
+                  content={RenderCustomizedLegend}
+                  // verticalAlign="middle"
+                  // align="center"
+               />
+               <RadialBar
+                  dataKey="uv"
+                  cornerRadius={20}
+                  style={{ zIndex: "2", position: "absolute" }}
+               />
                <PolarAngleAxis type="number" domain={[0, 1]} tick={false} />
-               <Legend content={RenderCustomizedLegend} />
             </RadialBarChart>
          </ResponsiveContainer>
       </div>
