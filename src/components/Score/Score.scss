@@ -4,3 +4,21 @@
    background-color: #fbfbfb;
    border-radius: 5px;
 }
+
+.legendWrapper {
+   position: relative;
+   // left: 50%;
+   // top: 50%;
+}
+.score {
+   font-size: 26px;
+   font-weight: 700;
+   line-height: 26px;
+}
+.description {
+   font-size: 16px;
+   font-weight: 500;
+   width: 100px;
+   color: #74798c;
+   line-height: 26px;
+}

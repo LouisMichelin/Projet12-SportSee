@@ -383,37 +383,37 @@ function getPerformanceDataMocked(userID) {
 //////////////////////////////////////////////////////////
 export function getMainData(userID) {
    if (isDataMocked) {
-      console.log("getMainData() version MOCKED");
+      // console.log("getMainData() version MOCKED");
       return getMainDataMocked(userID);
    } else {
-      console.log("getMainData() version API FETCH");
+      // console.log("getMainData() version API FETCH");
       return getMainDataAPI(userID);
    }
 }
 export function getActivityData(userID) {
    if (isDataMocked) {
-      console.log("getActivityDataMocked() version MOCKED");
+      // console.log("getActivityDataMocked() version MOCKED");
       return getActivityDataMocked(userID);
    } else {
-      console.log("getActivityDataAPI() version API FETCH");
+      // console.log("getActivityDataAPI() version API FETCH");
       return getActivityDataAPI(userID);
    }
 }
 export function getAverageData(userID) {
    if (isDataMocked) {
-      console.log("getAverageDataMocked() version MOCKED");
+      // console.log("getAverageDataMocked() version MOCKED");
       return getAverageDataMocked(userID);
    } else {
-      console.log("getAverageDataAPI() version API FETCH");
+      // console.log("getAverageDataAPI() version API FETCH");
       return getAverageDataAPI(userID);
    }
 }
 export function getPerformanceData(userID) {
    if (isDataMocked) {
-      console.log("getAverageDataMocked() version MOCKED");
+      // console.log("getAverageDataMocked() version MOCKED");
       return getPerformanceDataMocked(userID);
    } else {
-      console.log("getAverageDataAPI() version API FETCH");
+      // console.log("getAverageDataAPI() version API FETCH");
       return getPerformanceDataAPI(userID);
    }
 }
