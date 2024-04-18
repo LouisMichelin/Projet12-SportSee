@@ -78,7 +78,7 @@ function Daily({ useParamID }) {
             <BarChart
                data={graphData}
                margin={{
-                  top: 30,
+                  top: 40,
                   right: 10,
                   left: 50,
                   bottom: 5,
