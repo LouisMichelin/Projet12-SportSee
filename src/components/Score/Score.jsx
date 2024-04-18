@@ -62,16 +62,17 @@ function Score({ useParamID }) {
                // cx="50%"
                // cy="50%"
                // innerRadius="75%"
-               innerRadius="80%"
-               outerRadius="90%"
+               innerRadius="60%"
+               outerRadius="70%"
                data={graphData}
                // style={{ position: "absolute", width: "200px", height: "200px" }}
+               // style={{ position: "absolute" }}
             >
-               {/* <Legend
+               <Legend
                   content={RenderCustomizedLegend}
                   // verticalAlign="middle"
                   // align="center"
-               /> */}
+               />
                <RadialBar
                   dataKey="uv"
                   cornerRadius={20}
