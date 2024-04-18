@@ -21,13 +21,42 @@ function Performances({ useParamID }) {
          intensity: element.value,
       });
    });
+   graphData.reverse();
+   console.log(graphData);
+
+   function customTick({ payload, x, y, textAnchor, stroke, radius }) {
+      return (
+         <g className="recharts-layer recharts-polar-angle-axis-tick">
+            <text
+               radius={radius}
+               stroke={stroke}
+               x={x}
+               y={y}
+               className="recharts-text recharts-polar-angle-axis-tick-value"
+               text-anchor={textAnchor}
+               fontSize={12}
+               fontWeight={500}
+               fill="#ffffff"
+               style={{ textTransform: "capitalize" }}
+            >
+               <tspan x={x} dy="0em">
+                  {payload.value}
+               </tspan>
+            </text>
+         </g>
+      );
+   }
 
    return (
       <div className="PerformancesWrapper">
          <ResponsiveContainer width="100%" height="100%">
             <RadarChart cx="50%" cy="50%" outerRadius="70%" data={graphData}>
-               <PolarGrid radialLines={false} color="white" />
-               <PolarAngleAxis dataKey="subject" fontSize={12} />
+               <PolarGrid radialLines={false} />
+               <PolarAngleAxis
+                  dataKey="subject"
+                  fontSize={12}
+                  tick={customTick}
+               />
                <Radar
                   name="Mike"
                   dataKey="intensity"
