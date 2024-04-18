@@ -90,7 +90,7 @@ function Daily({ useParamID }) {
                {/*ABSCISSES*/}
                <XAxis
                   dataKey="day"
-                  height={60}
+                  height={55}
                   width={"auto"}
                   tickLine={false}
                   axisLine={{ stroke: "#d1d2d6" }}
@@ -131,7 +131,11 @@ function Daily({ useParamID }) {
                   cursor={{ fill: "#C4C4C480" }}
                />
                {/*LEGEND*/}
-               <Legend verticalAlign="top" content={RenderCustomizedLegend} />
+               <Legend
+                  verticalAlign="top"
+                  content={RenderCustomizedLegend}
+                  height={50}
+               />
                {/*BAR: KILOS*/}
                <Bar
                   yAxisId="right"

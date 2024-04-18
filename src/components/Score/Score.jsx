@@ -62,8 +62,8 @@ function Score({ useParamID }) {
                // cx="50%"
                // cy="50%"
                // innerRadius="75%"
-               innerRadius="60%"
-               outerRadius="70%"
+               innerRadius="65%"
+               outerRadius="75%"
                data={graphData}
                // style={{ position: "absolute", width: "200px", height: "200px" }}
                // style={{ position: "absolute" }}
