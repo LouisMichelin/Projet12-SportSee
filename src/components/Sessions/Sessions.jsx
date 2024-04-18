@@ -62,16 +62,12 @@ function Sessions({ useParamID }) {
                {/*OPACITY FADED SETTING */}
                <defs>
                   <linearGradient id="colorUv">
-                     <stop offset="5%" stopColor="#ffffff" stopOpacity={0.5} />
-                     <stop
-                        offset="50%"
-                        stopColor="#ffffff"
-                        stopOpacity={0.75}
-                     />
+                     <stop offset="5%" stopColor="#ffffff" stopOpacity={0.45} />
+                     <stop offset="50%" stopColor="#ffffff" stopOpacity={0.6} />
                      <stop
                         offset="100%"
                         stopColor="#ffffff"
-                        stopOpacity={0.8}
+                        stopOpacity={0.9}
                      />
                   </linearGradient>
                </defs>
@@ -82,16 +78,12 @@ function Sessions({ useParamID }) {
                   tickLine={false}
                   axisLine={false}
                   dy={10}
-                  // padding={{ left: 15, right: 15 }}
+                  padding={{ left: 15, right: 15 }}
                   style={{
                      fontSize: "12px",
                      opacity: "0.66",
                      fill: "#ffffff",
                   }}
-                  width={7}
-                  // allowDataOverflow
-                  // includeHidden
-                  // domain={["dataMin", "dataMax"]}
                />
                <YAxis domain={["dataMin - 1", "dataMax + 1"]} hide />
                <Tooltip content={CustomTooltip} cursor={false} />

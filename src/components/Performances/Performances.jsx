@@ -24,6 +24,7 @@ function Performances({ useParamID }) {
    graphData.reverse();
    console.log(graphData);
 
+   // Couleur des Labels + Majuscules
    function customTick({ payload, x, y, textAnchor, stroke, radius }) {
       return (
          <g className="recharts-layer recharts-polar-angle-axis-tick">
