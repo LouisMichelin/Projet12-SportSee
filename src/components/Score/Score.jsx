@@ -1,25 +1,21 @@
 import "./Score.scss";
 import { getMainData } from "../../services/APIservices";
 import {
-   PieChart,
    RadialBarChart,
-   Pie,
    RadialBar,
    Legend,
    ResponsiveContainer,
    PolarAngleAxis,
-   Label,
-   Cell,
 } from "recharts";
 
-// // Style du Radial Chart
-const style = {
-   // top: "50%",
-   // right: 0,
-   // transform: "translate(0, -50%)",
-   lineHeight: "24px",
-   width: "70px",
-};
+// // // Style du Radial Chart
+// const style = {
+//    // top: "50%",
+//    // right: 0,
+//    // transform: "translate(0, -50%)",
+//    lineHeight: "24px",
+//    width: "70px",
+// };
 
 function Score({ useParamID }) {
    const userData = getMainData(useParamID);

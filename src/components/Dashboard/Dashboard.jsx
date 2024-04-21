@@ -16,15 +16,15 @@ function Dashboard() {
          <Welcome useParamID={id} />
          <div className="DashboardSecondWrapper">
             <div style={{ display: "flex", flexDirection: "column" }}>
-               <Daily useParamID={id} />
+               {/* <Daily useParamID={id} /> */}
                <div className="DashboardDetails">
-                  <Sessions useParamID={id} />
-                  <Performances useParamID={id} />
-                  <Score useParamID={id} />
+                  {/* <Sessions useParamID={id} /> */}
+                  {/* <Performances useParamID={id} /> */}
+                  {/* <Score useParamID={id} /> */}
                </div>
             </div>
             <div className="DashboardScientificValues">
-               <Scientifics
+               {/* <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}
                   useParamID={id}
@@ -47,7 +47,7 @@ function Dashboard() {
                   imageAlt={"Icone des graisses"}
                   useParamID={id}
                   category={"lipidCount"}
-               />
+               /> */}
             </div>
          </div>
       </div>

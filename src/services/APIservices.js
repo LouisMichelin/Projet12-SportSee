@@ -264,39 +264,43 @@ const USER_PERFORMANCE = [
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
 
-const isDataMocked = true;
+const isDataMocked = false;
 
-function getMainDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}`, {
+//////////////////////////////////////////////////////////
+//                     API FUNCTIONS                    //
+//////////////////////////////////////////////////////////
+async function getMainDataAPI(userID) {
+   // fetch(`http://localhost:1337/user/${userID}`, {
+   //    method: "GET",
+   //    headers: {
+   //       "Content-Type": "application/json",
+   //    },
+   // })
+   //    .then((response) => {
+   //       if (response.ok) {
+   //          console.log("reponse OK");
+   //          return response.json();
+   //       }
+   //       throw response;
+   //    })
+   //    .then((data) => {
+   //       console.log("ligne de data OK");
+   //       console.log(data);
+   //       return data;
+   //    })
+   //    .catch((error) => {
+   //       console.error("Error fetching : ", error);
+   //    });
+   /////////////////////////////////////////////////////////////////////////
+   const response = await fetch(`http://localhost:1337/user/${userID}`, {
       method: "GET",
       headers: {
          "Content-Type": "application/json",
       },
-   })
-      .then((response) => {
-         if (response.ok) {
-            return response.json();
-         }
-         throw response;
-      })
-      .then((data) => {
-         // RIEN NE MARCHE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         // ---> Les console.log() retournent TOUTES le firstName attendu
-         // ---> MAIS c'est récupéré en UNDEFINED depuis <Welcome /> !!!
-         // ........
-         // QUE FAIRE ?????????????????????????????
-         console.log("on fait appel à l'API fetch");
-         let dataVar = data.data;
-         console.log("dataVar: ", dataVar.userInfos.firstName);
-         let firstNameVar = dataVar.userInfos.firstName;
-         console.log(firstNameVar);
-         return firstNameVar;
-         // OU ALORS
-         // On en fait un localStorage() ????????????????????????????????????
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
+   });
+   const json = await response.json();
+   console.log(json.data);
+   return json;
 }
 function getActivityDataAPI(userID) {
    fetch(`http://localhost:1337/user/${userID}/activity`, {

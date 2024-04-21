@@ -34,7 +34,7 @@ function Performances({ useParamID }) {
                x={x}
                y={y}
                className="recharts-text recharts-polar-angle-axis-tick-value"
-               text-anchor={textAnchor}
+               textAnchor={textAnchor}
                fontSize={12}
                fontWeight={500}
                fill="#ffffff"
