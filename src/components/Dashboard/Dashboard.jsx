@@ -5,11 +5,10 @@ import Sessions from "../Sessions/Sessions.jsx";
 import Performances from "../Performances/Performances.jsx";
 import Score from "../Score/Score.jsx";
 import Scientifics from "../Scientifics/Scientifics.jsx";
-// import { USER_MAIN_DATA } from "../../../P9-front-end-dashboard/app/data.js";
 import { useParams } from "react-router-dom";
 
 function Dashboard() {
-   const { id } = useParams(); // ID depuis useParams()
+   const { id } = useParams(); // ID fetched avec useParams().
 
    return (
       <div className="DashboardWrapper">

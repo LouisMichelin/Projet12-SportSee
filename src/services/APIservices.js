@@ -1,8 +1,17 @@
-// import { USER_MAIN_DATA } from "../../P9-front-end-dashboard/app/data";
-// import { USER_MAIN_DATA } from "../data/data";
-// ==> The requested module '/src/data/data.js?t=1712579940312' does not provide an export named 'USER_MAIN_DATA' (at APIservices.js:2:10)
-// ---------------------------------------------------------------------------------------------------------------------------------------
-// SEULE METHODE POUR EVITER LES ERREURS D'IMPORT :
+/**
+ * -------------------------------------------
+ * PROBLEME RENCONTRE DES LE DEBUT DU PROJET :
+ *  import { USER_MAIN_DATA } from "../../P9-front-end-dashboard/app/data";
+ *  import { USER_MAIN_DATA } from "../data/data";
+ *  >>> "The requested module '/src/data/data.js?t=1712579940312' does not provide an export named 'USER_MAIN_DATA' (at APIservices.js:2:10)"
+ * -------------------------------------------------------------------
+ * Dans mon cas de figure, les IMPORT des DATAS ne fonctionnaient PAS DU TOUT.
+ * Après de multiples vérifications auprès de ma mentore + de nombreuses heures
+ * de recherche sur forums, aucune solution n'a pu être trouvée à ce jour.
+ * En vue du temps passé à vouloir faire fonctionner les IMPORT,
+ * ils ont été simplifiés en les copiant simplement ci-dessous :
+ * -------------------------------------------------------------
+ */
 const USER_MAIN_DATA = [
    {
       id: 12,
@@ -262,15 +271,16 @@ const USER_PERFORMANCE = [
    },
 ];
 
-// ---------------------------------------------------------------------------------------------------------------------------------------
+// DATA MOCKED ?
+const isDataMocked = true;
 
-const isDataMocked = false;
-
-//////////////////////////////////////////////////////////
-//                     API FUNCTIONS                    //
-//////////////////////////////////////////////////////////
+/**
+ * ------------------------------------
+ * FONCTIONS DATA : VERSION API-FETCH :
+ * ------------------------------------
+ */
 async function getMainDataAPI(userID) {
-   // fetch(`http://localhost:1337/user/${userID}`, {
+   // return fetch(`http://localhost:1337/user/${userID}`, {
    //    method: "GET",
    //    headers: {
    //       "Content-Type": "application/json",
@@ -278,15 +288,13 @@ async function getMainDataAPI(userID) {
    // })
    //    .then((response) => {
    //       if (response.ok) {
-   //          console.log("reponse OK");
    //          return response.json();
    //       }
    //       throw response;
    //    })
    //    .then((data) => {
-   //       console.log("ligne de data OK");
-   //       console.log(data);
-   //       return data;
+   //       console.log("DATA APISERVICES: ", data.data);
+   //       return data.data;
    //    })
    //    .catch((error) => {
    //       console.error("Error fetching : ", error);
@@ -299,8 +307,7 @@ async function getMainDataAPI(userID) {
       },
    });
    const json = await response.json();
-   console.log(json.data);
-   return json;
+   return json.data;
 }
 function getActivityDataAPI(userID) {
    fetch(`http://localhost:1337/user/${userID}/activity`, {
@@ -365,10 +372,11 @@ function getPerformanceDataAPI(userID) {
          console.error("Error fetching : ", error);
       });
 }
-
-//////////////////////////////////////////////////////////
-//                     MOCKED FUNCTIONS                 //
-//////////////////////////////////////////////////////////
+/**
+ * -----------------------------------
+ * FONCTIONS DATA : VERSION "MOCKED" :
+ * -----------------------------------
+ */
 function getMainDataMocked(userID) {
    return USER_MAIN_DATA.find((element) => element.id == userID);
 }
@@ -381,43 +389,41 @@ function getAverageDataMocked(userID) {
 function getPerformanceDataMocked(userID) {
    return USER_PERFORMANCE.find((element) => element.userId == userID);
 }
-
-//////////////////////////////////////////////////////////
-//                     MAIN FUNCTIONS                   //
-//////////////////////////////////////////////////////////
+/**
+ * ------------------------------------------------------
+ * FONCTIONS DATA : VERSION MAIN (selon "isDataMocked") :
+ * ------------------------------------------------------
+ */
 export function getMainData(userID) {
    if (isDataMocked) {
-      // console.log("getMainData() version MOCKED");
+      console.log(
+         "VERSION MOCKED: ",
+         USER_MAIN_DATA.find((element) => element.id == userID)
+      );
       return getMainDataMocked(userID);
    } else {
-      // console.log("getMainData() version API FETCH");
+      console.log("VERSION API FETCH");
       return getMainDataAPI(userID);
    }
 }
 export function getActivityData(userID) {
    if (isDataMocked) {
-      // console.log("getActivityDataMocked() version MOCKED");
       return getActivityDataMocked(userID);
    } else {
-      // console.log("getActivityDataAPI() version API FETCH");
       return getActivityDataAPI(userID);
    }
 }
 export function getAverageData(userID) {
    if (isDataMocked) {
-      // console.log("getAverageDataMocked() version MOCKED");
       return getAverageDataMocked(userID);
    } else {
-      // console.log("getAverageDataAPI() version API FETCH");
       return getAverageDataAPI(userID);
    }
 }
 export function getPerformanceData(userID) {
    if (isDataMocked) {
-      // console.log("getAverageDataMocked() version MOCKED");
       return getPerformanceDataMocked(userID);
    } else {
-      // console.log("getAverageDataAPI() version API FETCH");
       return getPerformanceDataAPI(userID);
    }
 }
