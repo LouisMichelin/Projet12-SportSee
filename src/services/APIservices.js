@@ -272,7 +272,7 @@ const USER_PERFORMANCE = [
 ];
 
 // DATA MOCKED ?
-const isDataMocked = true;
+const isDataMocked = false;
 
 /**
  * ------------------------------------
@@ -280,7 +280,7 @@ const isDataMocked = true;
  * ------------------------------------
  */
 async function getMainDataAPI(userID) {
-   // return fetch(`http://localhost:1337/user/${userID}`, {
+   // await fetch(`http://localhost:1337/user/${userID}`, {
    //    method: "GET",
    //    headers: {
    //       "Content-Type": "application/json",
@@ -309,26 +309,19 @@ async function getMainDataAPI(userID) {
    const json = await response.json();
    return json.data;
 }
-function getActivityDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}/activity`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((res) => {
-         if (res.ok) {
-            return res.json();
-         }
-         throw res;
-      })
-      .then((data) => {
-         // sessionStorage.setItem("userActivityData", JSON.stringify(data));
-         // MÊME PROBLEME QUE L.269
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
+async function getActivityDataAPI(userID) {
+   const response = await fetch(
+      `http://localhost:1337/user/${userID}/activity`,
+      {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+         },
+      }
+   );
+   // console.log(response);
+   const json = await response.json();
+   return json.data;
 }
 function getAverageDataAPI(userID) {
    fetch(`http://localhost:1337/user/${userID}/average-sessions`, {
@@ -396,20 +389,19 @@ function getPerformanceDataMocked(userID) {
  */
 export function getMainData(userID) {
    if (isDataMocked) {
-      console.log(
-         "VERSION MOCKED: ",
-         USER_MAIN_DATA.find((element) => element.id == userID)
-      );
+      // console.log("-----DATA MOCKED-----");
       return getMainDataMocked(userID);
    } else {
-      console.log("VERSION API FETCH");
+      // console.log("-----API FETCHED DATA-----");
       return getMainDataAPI(userID);
    }
 }
 export function getActivityData(userID) {
    if (isDataMocked) {
+      console.log("-----DATA MOCKED-----");
       return getActivityDataMocked(userID);
    } else {
+      console.log("-----API FETCHED DATA-----");
       return getActivityDataAPI(userID);
    }
 }

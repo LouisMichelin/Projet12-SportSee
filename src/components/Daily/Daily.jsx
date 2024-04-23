@@ -10,9 +10,47 @@ import {
    CartesianGrid,
 } from "recharts";
 import { getActivityData } from "../../services/APIservices";
+import { useEffect, useState } from "react";
 
 function Daily({ useParamID }) {
-   const userData = getActivityData(useParamID).sessions;
+   // const userData = getActivityData(useParamID).sessions;
+   const [userDataFetched, setUserDataFetched] = useState();
+
+   let test123 = [];
+   let graphData = [];
+
+   (async () => {
+      const userData = await getActivityData(useParamID);
+      // console.log(userData.sessions);
+      for (let i = 0; i < userData.sessions.length; i++) {
+         test123.push(userData.sessions[i]);
+      }
+
+      // test123.push(userData.sessions((data) => data));
+      console.log(test123);
+      // return test123;
+      let graphData = [];
+
+      test123.forEach((element, index) => {
+         graphData.push({
+            day: index + 1, // (Jours 1-7 et non pas 0-6)
+            kilogram: element.kilogram,
+            calories: element.calories,
+         });
+      });
+      console.log(graphData);
+   })();
+   ///////////////////////////////////////////////////////////////////////////////////////////
+   // let graphData = [];
+   // test123.forEach((element, index) => {
+   //    graphData.push({
+   //       day: index + 1, // (Jours 1-7 et non pas 0-6)
+   //       kilogram: element.kilogram,
+   //       calories: element.calories,
+   //    });
+   // });
+   ///////////////////////////////////////////////////////////////////////////////////////////
+
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {
       if (active && payload && payload.length) {
@@ -62,14 +100,6 @@ function Daily({ useParamID }) {
          </div>
       );
    };
-   let graphData = [];
-   userData.forEach((element, index) => {
-      graphData.push({
-         day: index + 1, // (Jours 1-7 et non pas 0-6)
-         kilogram: element.kilogram,
-         calories: element.calories,
-      });
-   });
 
    return (
       <div className="DailyWrapper">
