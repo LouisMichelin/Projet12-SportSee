@@ -14,32 +14,65 @@ import { useEffect, useState } from "react";
 
 function Daily({ useParamID }) {
    // const userData = getActivityData(useParamID).sessions;
-   const [userDataFetched, setUserDataFetched] = useState();
+   const [userDataFetched, setUserDataFetched] = useState(null);
 
-   let test123 = [];
    let graphData = [];
+   let sessions = [];
 
-   (async () => {
-      const userData = await getActivityData(useParamID);
-      // console.log(userData.sessions);
-      for (let i = 0; i < userData.sessions.length; i++) {
-         test123.push(userData.sessions[i]);
+   useEffect(() => {
+      async function fetchData() {
+         const reponse = await getActivityData(useParamID);
+         // console.log(reponse);
+         let graphData = { sessions };
+         // console.log("graphdata 33 ", graphData);
+         for (let i = 0; i < reponse.sessions.length; i++) {
+            if (graphData.sessions.length < 7) {
+               // console.log(reponse.sessions[i]);
+               // graphData.push(reponse.sessions[i]);
+               // console.log(graphData);
+               /////////////////////
+               graphData.sessions.push({
+                  day: i + 1, // (Jours 1-7 et non pas 0-6)
+                  kilogram: reponse.sessions[i].kilogram,
+                  calories: reponse.sessions[i].calories,
+               });
+            }
+         }
+         // console.log("graphData: ", graphData);
+         return setUserDataFetched(graphData);
+         // return graphData;
       }
-
-      // test123.push(userData.sessions((data) => data));
-      console.log(test123);
-      // return test123;
-      let graphData = [];
-
-      test123.forEach((element, index) => {
-         graphData.push({
-            day: index + 1, // (Jours 1-7 et non pas 0-6)
-            kilogram: element.kilogram,
-            calories: element.calories,
-         });
-      });
-      console.log(graphData);
-   })();
+      // fetchData();
+   }),
+      [useParamID];
+   // console.log(graphData);
+   // ------------------------------------------------------------------------------------------
+   // IDEES :
+   // ------------------------------------------------------------------------------------------
+   // let test123 = [];
+   // let graphData = [];
+   // (async () => {
+   //    const userData = await getActivityData(useParamID);
+   //    // console.log(userData.sessions);
+   //    for (let i = 0; i < userData.sessions.length; i++) {
+   //       test123.push(userData.sessions[i]);
+   //    }
+   //
+   //    // test123.push(userData.sessions((data) => data));
+   //    console.log(test123);
+   //    // return test123;
+   //    let graphData = [];
+   //
+   //    test123.forEach((element, index) => {
+   //       graphData.push({
+   //          day: index + 1, // (Jours 1-7 et non pas 0-6)
+   //          kilogram: element.kilogram,
+   //          calories: element.calories,
+   //       });
+   //    });
+   //    console.log(graphData);
+   // })();
+   // ------------------------------------------------------------------------------------------
    ///////////////////////////////////////////////////////////////////////////////////////////
    // let graphData = [];
    // test123.forEach((element, index) => {

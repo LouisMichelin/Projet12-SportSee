@@ -402,6 +402,7 @@ export function getActivityData(userID) {
       return getActivityDataMocked(userID);
    } else {
       console.log("-----API FETCHED DATA-----");
+      // console.log(USER_ACTIVITY[0]);
       return getActivityDataAPI(userID);
    }
 }
