@@ -14,38 +14,56 @@ import { useEffect, useState } from "react";
 
 function Daily({ useParamID }) {
    // const userData = getActivityData(useParamID).sessions;
-   const [userDataFetched, setUserDataFetched] = useState(null);
-
-   let graphData = [];
-   let sessions = [];
+   const [userDataFetched, setUserDataFetched] = useState([]);
 
    useEffect(() => {
-      async function fetchData() {
+      const fetchData = async () => {
          const reponse = await getActivityData(useParamID);
-         // console.log(reponse);
-         let graphData = { sessions };
-         // console.log("graphdata 33 ", graphData);
+         console.log("WELCOME", reponse.sessions);
          for (let i = 0; i < reponse.sessions.length; i++) {
-            if (graphData.sessions.length < 7) {
-               // console.log(reponse.sessions[i]);
-               // graphData.push(reponse.sessions[i]);
-               // console.log(graphData);
-               /////////////////////
-               graphData.sessions.push({
-                  day: i + 1, // (Jours 1-7 et non pas 0-6)
-                  kilogram: reponse.sessions[i].kilogram,
-                  calories: reponse.sessions[i].calories,
-               });
+            console.log("reponseSessionsLength: ", reponse.sessions.length);
+            console.log("userDatafetched length: ", userDataFetched.length);
+            if (userDataFetched.length < 7) {
+               setUserDataFetched((userDataFetched) => [
+                  ...userDataFetched,
+                  {
+                     day: i + 1, // (Jours 1-7 et non pas 0-6)
+                     kilogram: reponse.sessions[i].kilogram,
+                     calories: reponse.sessions[i].calories,
+                  },
+               ]);
             }
          }
-         // console.log("graphData: ", graphData);
-         return setUserDataFetched(graphData);
-         // return graphData;
-      }
-      // fetchData();
+      };
+      fetchData();
    }),
-      [useParamID];
-   // console.log(graphData);
+      [];
+
+   // ------------------------------------------------------------------------------------------
+   // ------------------------------------------------------------------------------------------
+   // const fetchData = async () => {
+   //    const reponse = await getActivityData(useParamID);
+   //    for (
+   //       let i = 0;
+   //       i < reponse.sessions.length && graphData.sessions.length < 7;
+   //       i++
+   //    ) {
+   //       graphData.sessions.push({
+   //          day: i + 1, // (Jours 1-7 et non pas 0-6)
+   //          kilogram: reponse.sessions[i].kilogram,
+   //          calories: reponse.sessions[i].calories,
+   //       });
+   //    }
+   //    console.log("graphData: ", graphData);
+   //    // return graphData;
+   // };
+   // useEffect(() => {
+   //    fetchData();
+   //    setUserDataFetched(graphData);
+   //    // console.log(graphData);
+   //    // console.log(userDataFetched);
+   // }),
+   //    [reponse];
    // ------------------------------------------------------------------------------------------
    // IDEES :
    // ------------------------------------------------------------------------------------------
@@ -139,7 +157,7 @@ function Daily({ useParamID }) {
          <div className="DailyTitle">Activité quotidienne</div>
          <ResponsiveContainer width="100%" height="100%">
             <BarChart
-               data={graphData}
+               data={userDataFetched}
                margin={{
                   top: 40,
                   right: 10,
@@ -152,7 +170,7 @@ function Daily({ useParamID }) {
                <CartesianGrid strokeDasharray="2" vertical={false} />
                {/*ABSCISSES*/}
                <XAxis
-                  dataKey="day"
+                  dataKey={"day"}
                   height={55}
                   width={"auto"}
                   tickLine={false}
