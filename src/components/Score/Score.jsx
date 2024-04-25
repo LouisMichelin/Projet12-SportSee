@@ -9,15 +9,6 @@ import {
 import { getMainData } from "../../services/APIservices";
 import { useEffect, useState } from "react";
 
-// // // Style du Radial Chart
-// const style = {
-//    // top: "50%",
-//    // right: 0,
-//    // transform: "translate(0, -50%)",
-//    lineHeight: "24px",
-//    width: "70px",
-// };
-
 function Score({ useParamID }) {
    const [userDataFetched, setUserDataFetched] = useState([]);
    const [userScoreDisplayed, setUserScoreDisplayed] = useState(0);
@@ -27,13 +18,13 @@ function Score({ useParamID }) {
       // Function Async fetchData() récupère les données :
       async function fetchData() {
          const reponse = await getMainData(useParamID);
-         // Reset du useState() :
+         // Reset des useState() :
          setUserDataFetched([]);
          setUserScoreDisplayed(0);
          // setUseState() du Score affiché :
          const userScore = reponse.score ? reponse.score : reponse.todayScore;
          setUserScoreDisplayed(userScore * 100);
-
+         // setUseState() du Radar Recharts :
          setUserDataFetched((userDataFetched) => [
             ...userDataFetched,
             {
@@ -49,27 +40,11 @@ function Score({ useParamID }) {
          fetchData();
       }
    });
-   // console.log("allDataFetched: ", userDataFetched);
-
-   /////////////////////////////////////////////////////////////////////////////
-   // const userData = getMainData(useParamID);
-   // console.log(userData);
-   // const userScore = userData.score ? userData.score : userData.todayScore;
-   // console.log(userScore);
-
-   // const graphData = [
-   //    {
-   //       name: "objectif",
-   //       uv: userScore,
-   //       fill: "#FF0000",
-   //    },
-   // ];
 
    const RenderCustomizedLegend = () => {
       return (
          <div className="legendWrapper">
             <div className="score">{userScoreDisplayed}%</div>
-            {/* <div className="score">{userScore ? userScore * 100 : 0}%</div> */}
             <div className="description">de votre objectif</div>
          </div>
       );

@@ -23,7 +23,7 @@ function Dashboard() {
                </div>
             </div>
             <div className="DashboardScientificValues">
-               {/* <Scientifics
+               <Scientifics
                   imageSrc={"src/assets/calories-icon.png"}
                   imageAlt={"Icone des calories"}
                   useParamID={id}
@@ -46,7 +46,7 @@ function Dashboard() {
                   imageAlt={"Icone des graisses"}
                   useParamID={id}
                   category={"lipidCount"}
-               /> */}
+               />
             </div>
          </div>
       </div>

@@ -1,45 +1,70 @@
 import "./Scientifics.scss";
 import { getMainData } from "../../services/APIservices";
+import { useEffect, useState } from "react";
 
 function Scientifics({ useParamID, imageSrc, imageAlt, category }) {
-   // Function API
-   const userData = getMainData(useParamID).keyData;
+   const [userDataFetched, setUserDataFetched] = useState([]);
+   const [scientificName, setScientificName] = useState("");
+   const [scientificUnits, setScientificUnits] = useState("");
+   const [canRunFunction, setCanRunFunction] = useState(true);
 
-   let scientificCase;
-   let scientificName;
-   let scientificUnits;
-
-   switch (category) {
-      case "calorieCount":
-         scientificCase = userData.calorieCount.toLocaleString("en-US");
-         scientificName = "Calories";
-         scientificUnits = "kCal";
-         break;
-      case "proteinCount":
-         scientificCase = userData.proteinCount;
-         scientificName = "Proteines";
-         scientificUnits = "g";
-         break;
-      case "carbohydrateCount":
-         scientificCase = userData.carbohydrateCount;
-         scientificName = "Glucides";
-         scientificUnits = "g";
-         break;
-      case "lipidCount":
-         scientificCase = userData.lipidCount;
-         scientificName = "Lipides";
-         scientificUnits = "g";
-         break;
-      default:
-         alert("NOPE Error from Switch().");
-   }
+   useEffect(() => {
+      // Function Async fetchData() récupère les données :
+      async function fetchData() {
+         const reponse = await getMainData(useParamID);
+         // Reset du useState() :
+         setUserDataFetched([]);
+         // Switch pour le useState() :
+         switch (category) {
+            case "calorieCount":
+               setUserDataFetched((userDataFetched) => [
+                  ...userDataFetched,
+                  reponse.keyData.calorieCount,
+               ]);
+               setScientificName("Calories");
+               setScientificUnits("kCal");
+               break;
+            case "proteinCount":
+               setUserDataFetched((userDataFetched) => [
+                  ...userDataFetched,
+                  reponse.keyData.proteinCount,
+               ]);
+               setScientificName("Proteines");
+               setScientificUnits("g");
+               break;
+            case "carbohydrateCount":
+               setUserDataFetched((userDataFetched) => [
+                  ...userDataFetched,
+                  reponse.keyData.carbohydrateCount,
+               ]);
+               setScientificName("Glucides");
+               setScientificUnits("g");
+               break;
+            case "lipidCount":
+               setUserDataFetched((userDataFetched) => [
+                  ...userDataFetched,
+                  reponse.keyData.lipidCount,
+               ]);
+               setScientificName("Lipides");
+               setScientificUnits("g");
+               break;
+            default:
+               console.log("Error from Switch()");
+         }
+      }
+      // Break Infinite Loop :
+      if (canRunFunction) {
+         setCanRunFunction(!canRunFunction);
+         fetchData();
+      }
+   });
 
    return (
       <div className="ScientificWrapper">
          <img src={imageSrc} alt={imageAlt} />
          <div className="ScientificTitleWrapper">
             <div className="ScientificTitle">
-               {scientificCase + scientificUnits}
+               {userDataFetched.toLocaleString("en-US") + scientificUnits}
             </div>
             <div className="ScientificDescription">{scientificName}</div>
          </div>
