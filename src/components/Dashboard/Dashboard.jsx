@@ -17,7 +17,7 @@ function Dashboard() {
             <div style={{ display: "flex", flexDirection: "column" }}>
                <Daily useParamID={id} />
                <div className="DashboardDetails">
-                  {/* <Sessions useParamID={id} /> */}
+                  <Sessions useParamID={id} />
                   {/* <Performances useParamID={id} /> */}
                   {/* <Score useParamID={id} /> */}
                </div>

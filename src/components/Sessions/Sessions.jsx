@@ -8,18 +8,35 @@ import {
    ResponsiveContainer,
 } from "recharts";
 import { getAverageData } from "../../services/APIservices";
+import { useEffect, useState } from "react";
 
 function Sessions({ useParamID }) {
-   const userData = getAverageData(useParamID).sessions;
-
-   let graphData = [];
+   const [userDataFetched, setUserDataFetched] = useState([]);
+   const [canRunFunction, setCanRunFunction] = useState(true);
    const weeklyDays = ["L", "M", "M", "J", "V", "S", "D"];
 
-   userData.forEach((element, index) => {
-      graphData.push({
-         day: weeklyDays[index], // (Jours L, M, [...] jusqu'à D)
-         duree: element.sessionLength,
-      });
+   useEffect(() => {
+      // Function Async fetchData() récupère les données :
+      async function fetchData() {
+         const reponse = await getAverageData(useParamID);
+         // Reset du useState() :
+         setUserDataFetched([]);
+         // Setup de l'Array Customized pour le Recharts :
+         for (let i = 0; i < reponse.sessions.length; i++) {
+            setUserDataFetched((userDataFetched) => [
+               ...userDataFetched,
+               {
+                  day: weeklyDays[i],
+                  duree: reponse.sessions[i].sessionLength,
+               },
+            ]);
+         }
+      }
+      // Break Infinite Loop :
+      if (canRunFunction) {
+         setCanRunFunction(!canRunFunction);
+         fetchData();
+      }
    });
 
    // CUSTOMIZED TOOLTIP
@@ -51,11 +68,9 @@ function Sessions({ useParamID }) {
          <div className="SessionsTitle">Durée moyenne des sessions</div>
          <ResponsiveContainer width="100%" height="100%">
             <LineChart
-               data={graphData}
+               data={userDataFetched}
                margin={{
                   top: 20,
-                  // right: -20,
-                  // left: -10,
                   bottom: 20,
                }}
             >
@@ -88,8 +103,6 @@ function Sessions({ useParamID }) {
                <YAxis domain={["dataMin - 1", "dataMax + 1"]} hide />
                <Tooltip content={CustomTooltip} cursor={false} />
                <Line
-                  // allowDataOverflow
-                  // includeHidden
                   type="monotone"
                   dataKey="duree"
                   stroke="url(#colorUv)"

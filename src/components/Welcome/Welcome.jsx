@@ -8,7 +8,6 @@ function Welcome({ useParamID }) {
    useEffect(() => {
       (async () => {
          const userData = await getMainData(useParamID);
-         // console.log("WELCOME", userData);
          setUserDataFetched(userData.userInfos.firstName);
       })();
    }),

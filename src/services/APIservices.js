@@ -271,35 +271,16 @@ const USER_PERFORMANCE = [
    },
 ];
 
-// DATA MOCKED ?
+/**
+ * EST-CE QUE DATA === MOCKED ou API-FETCHED ?
+ */
 const isDataMocked = false;
-
 /**
  * ------------------------------------
  * FONCTIONS DATA : VERSION API-FETCH :
  * ------------------------------------
  */
 async function getMainDataAPI(userID) {
-   // await fetch(`http://localhost:1337/user/${userID}`, {
-   //    method: "GET",
-   //    headers: {
-   //       "Content-Type": "application/json",
-   //    },
-   // })
-   //    .then((response) => {
-   //       if (response.ok) {
-   //          return response.json();
-   //       }
-   //       throw response;
-   //    })
-   //    .then((data) => {
-   //       console.log("DATA APISERVICES: ", data.data);
-   //       return data.data;
-   //    })
-   //    .catch((error) => {
-   //       console.error("Error fetching : ", error);
-   //    });
-   /////////////////////////////////////////////////////////////////////////
    const response = await fetch(`http://localhost:1337/user/${userID}`, {
       method: "GET",
       headers: {
@@ -319,51 +300,34 @@ async function getActivityDataAPI(userID) {
          },
       }
    );
-   // console.log(response);
    const json = await response.json();
    return json.data;
 }
-function getAverageDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}/average-sessions`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((res) => {
-         if (res.ok) {
-            return res.json();
-         }
-         throw res;
-      })
-      .then((data) => {
-         // sessionStorage.setItem("userAverageData", JSON.stringify(data));
-         // MÊME PROBLEME QUE L.269
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
+async function getAverageDataAPI(userID) {
+   const response = await fetch(
+      `http://localhost:1337/user/${userID}/average-sessions`,
+      {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+         },
+      }
+   );
+   const json = await response.json();
+   return json.data;
 }
-function getPerformanceDataAPI(userID) {
-   fetch(`http://localhost:1337/user/${userID}/performance`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   })
-      .then((res) => {
-         if (res.ok) {
-            return res.json();
-         }
-         throw res;
-      })
-      .then((data) => {
-         // sessionStorage.setItem("userPerformanceData", JSON.stringify(data));
-         // MÊME PROBLEME QUE L.269
-      })
-      .catch((error) => {
-         console.error("Error fetching : ", error);
-      });
+async function getPerformanceDataAPI(userID) {
+   const response = await fetch(
+      `http://localhost:1337/user/${userID}/performance`,
+      {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+         },
+      }
+   );
+   const json = await response.json();
+   return json.data;
 }
 /**
  * -----------------------------------
@@ -398,25 +362,28 @@ export function getMainData(userID) {
 }
 export function getActivityData(userID) {
    if (isDataMocked) {
-      console.log("-----DATA MOCKED-----");
+      // console.log("-----DATA MOCKED-----");
       return getActivityDataMocked(userID);
    } else {
-      console.log("-----API FETCHED DATA-----");
-      // console.log(USER_ACTIVITY[0]);
+      // console.log("-----API FETCHED DATA-----");
       return getActivityDataAPI(userID);
    }
 }
 export function getAverageData(userID) {
    if (isDataMocked) {
+      // console.log("-----DATA MOCKED-----");
       return getAverageDataMocked(userID);
    } else {
+      // console.log("-----API FETCHED DATA-----");
       return getAverageDataAPI(userID);
    }
 }
 export function getPerformanceData(userID) {
    if (isDataMocked) {
+      console.log("-----DATA MOCKED-----");
       return getPerformanceDataMocked(userID);
    } else {
+      console.log("-----API FETCHED DATA-----");
       return getPerformanceDataAPI(userID);
    }
 }
