@@ -381,10 +381,10 @@ export function getAverageData(userID) {
 }
 export function getPerformanceData(userID) {
    if (isDataMocked) {
-      console.log("-----DATA MOCKED-----");
+      // console.log("-----DATA MOCKED-----");
       return getPerformanceDataMocked(userID);
    } else {
-      console.log("-----API FETCHED DATA-----");
+      // console.log("-----API FETCHED DATA-----");
       return getPerformanceDataAPI(userID);
    }
 }

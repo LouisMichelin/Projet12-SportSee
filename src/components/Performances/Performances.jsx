@@ -21,7 +21,6 @@ function Performances({ useParamID }) {
          setUserDataFetched([]);
          // Setup de l'Array Customized pour le Recharts :
          for (let i = 0; i < reponse.data.length; i++) {
-            console.log("reponse.data", reponse.data[i].value);
             setUserDataFetched((userDataFetched) => [
                ...userDataFetched,
                {

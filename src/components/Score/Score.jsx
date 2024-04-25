@@ -19,23 +19,57 @@ import { useEffect, useState } from "react";
 // };
 
 function Score({ useParamID }) {
-   const userData = getMainData(useParamID);
-   console.log(userData);
-   const userScore = userData.score ? userData.score : userData.todayScore;
-   console.log(userScore);
+   const [userDataFetched, setUserDataFetched] = useState([]);
+   const [userScoreDisplayed, setUserScoreDisplayed] = useState(0);
+   const [canRunFunction, setCanRunFunction] = useState(true);
 
-   const graphData = [
-      {
-         name: "objectif",
-         uv: userScore,
-         fill: "#FF0000",
-      },
-   ];
+   useEffect(() => {
+      // Function Async fetchData() récupère les données :
+      async function fetchData() {
+         const reponse = await getMainData(useParamID);
+         // Reset du useState() :
+         setUserDataFetched([]);
+         setUserScoreDisplayed(0);
+         // setUseState() du Score affiché :
+         const userScore = reponse.score ? reponse.score : reponse.todayScore;
+         setUserScoreDisplayed(userScore * 100);
+
+         setUserDataFetched((userDataFetched) => [
+            ...userDataFetched,
+            {
+               name: "objectif",
+               score: userScore,
+               fill: "#FF0000",
+            },
+         ]);
+      }
+      // Break Infinite Loop :
+      if (canRunFunction) {
+         setCanRunFunction(!canRunFunction);
+         fetchData();
+      }
+   });
+   // console.log("allDataFetched: ", userDataFetched);
+
+   /////////////////////////////////////////////////////////////////////////////
+   // const userData = getMainData(useParamID);
+   // console.log(userData);
+   // const userScore = userData.score ? userData.score : userData.todayScore;
+   // console.log(userScore);
+
+   // const graphData = [
+   //    {
+   //       name: "objectif",
+   //       uv: userScore,
+   //       fill: "#FF0000",
+   //    },
+   // ];
 
    const RenderCustomizedLegend = () => {
       return (
          <div className="legendWrapper">
-            <div className="score">{userScore ? userScore * 100 : 0}%</div>
+            <div className="score">{userScoreDisplayed}%</div>
+            {/* <div className="score">{userScore ? userScore * 100 : 0}%</div> */}
             <div className="description">de votre objectif</div>
          </div>
       );
@@ -44,34 +78,19 @@ function Score({ useParamID }) {
    return (
       <div className="ScoreWrapper">
          <h3 className="ScoreTitle">Score</h3>
-         <ResponsiveContainer
-            width="100%"
-            height="100%"
-
-            // wrapperStyle={{ position: "relative" }}
-         >
+         <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart
+               data={userDataFetched}
                width={730}
                height={250}
-               // wrapperStyle={{ position: "absolute" }}
                startAngle={90}
                endAngle={450}
-               // cx="50%"
-               // cy="50%"
-               // innerRadius="75%"
                innerRadius="65%"
                outerRadius="75%"
-               data={graphData}
-               // style={{ position: "absolute", width: "200px", height: "200px" }}
-               // style={{ position: "absolute" }}
             >
-               <Legend
-                  content={RenderCustomizedLegend}
-                  // verticalAlign="middle"
-                  // align="center"
-               />
+               <Legend content={RenderCustomizedLegend} />
                <RadialBar
-                  dataKey="uv"
+                  dataKey="score"
                   cornerRadius={20}
                   style={{ zIndex: "2", position: "absolute" }}
                />
