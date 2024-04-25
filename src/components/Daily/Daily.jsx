@@ -15,15 +15,14 @@ import { useEffect, useState } from "react";
 function Daily({ useParamID }) {
    // const userData = getActivityData(useParamID).sessions;
    const [userDataFetched, setUserDataFetched] = useState([]);
+   const [canRunFunction, setCanRunFunction] = useState(true);
 
    useEffect(() => {
       const fetchData = async () => {
          const reponse = await getActivityData(useParamID);
-         console.log("WELCOME", reponse.sessions);
+         console.log("WELCOME - Reponse.length", reponse.sessions.length);
          for (let i = 0; i < reponse.sessions.length; i++) {
-            console.log("reponseSessionsLength: ", reponse.sessions.length);
-            console.log("userDatafetched length: ", userDataFetched.length);
-            if (userDataFetched.length < 7) {
+            if (userDataFetched.length !== reponse.sessions.length) {
                setUserDataFetched((userDataFetched) => [
                   ...userDataFetched,
                   {
@@ -33,9 +32,17 @@ function Daily({ useParamID }) {
                   },
                ]);
             }
+            console.log("test length ", userDataFetched.length);
          }
       };
-      fetchData();
+
+      if (canRunFunction) {
+         setCanRunFunction(!canRunFunction);
+         fetchData();
+      }
+
+      // userDataFetched.length < 7 ? fetchData() : null;
+      // console.log("WELCOME - UseDataFetched.length", userDataFetched.length);
    }),
       [];
 
