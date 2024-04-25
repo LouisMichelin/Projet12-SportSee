@@ -1,6 +1,4 @@
 import "./Performances.scss";
-import { getPerformanceData } from "../../services/APIservices";
-
 import {
    Radar,
    RadarChart,
@@ -8,21 +6,37 @@ import {
    PolarAngleAxis,
    ResponsiveContainer,
 } from "recharts";
+import { getPerformanceData } from "../../services/APIservices";
+import { useEffect, useState } from "react";
 
 function Performances({ useParamID }) {
-   const userData = getPerformanceData(useParamID);
+   const [userDataFetched, setUserDataFetched] = useState([]);
+   const [canRunFunction, setCanRunFunction] = useState(true);
 
-   let graphData = [];
-
-   // Regroupement des datas "KIND" & "DATA" dans graphData[]
-   userData.data.forEach((element, index) => {
-      graphData.push({
-         subject: userData.kind[index + 1],
-         intensity: element.value,
-      });
+   useEffect(() => {
+      // Function Async fetchData() récupère les données :
+      async function fetchData() {
+         const reponse = await getPerformanceData(useParamID);
+         // Reset du useState() :
+         setUserDataFetched([]);
+         // Setup de l'Array Customized pour le Recharts :
+         for (let i = 0; i < reponse.data.length; i++) {
+            console.log("reponse.data", reponse.data[i].value);
+            setUserDataFetched((userDataFetched) => [
+               ...userDataFetched,
+               {
+                  subject: reponse.kind[i + 1],
+                  intensity: reponse.data[i].value,
+               },
+            ]);
+         }
+      }
+      // Break Infinite Loop :
+      if (canRunFunction) {
+         setCanRunFunction(!canRunFunction);
+         fetchData();
+      }
    });
-   graphData.reverse();
-   console.log(graphData);
 
    // Couleur des Labels + Majuscules
    function customTick({ payload, x, y, textAnchor, stroke, radius }) {
@@ -51,7 +65,12 @@ function Performances({ useParamID }) {
    return (
       <div className="PerformancesWrapper">
          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={graphData}>
+            <RadarChart
+               cx="50%"
+               cy="50%"
+               outerRadius="70%"
+               data={userDataFetched}
+            >
                <PolarGrid radialLines={false} />
                <PolarAngleAxis
                   dataKey="subject"

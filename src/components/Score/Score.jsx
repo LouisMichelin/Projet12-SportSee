@@ -1,5 +1,4 @@
 import "./Score.scss";
-import { getMainData } from "../../services/APIservices";
 import {
    RadialBarChart,
    RadialBar,
@@ -7,6 +6,8 @@ import {
    ResponsiveContainer,
    PolarAngleAxis,
 } from "recharts";
+import { getMainData } from "../../services/APIservices";
+import { useEffect, useState } from "react";
 
 // // // Style du Radial Chart
 // const style = {

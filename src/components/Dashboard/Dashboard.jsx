@@ -18,7 +18,7 @@ function Dashboard() {
                <Daily useParamID={id} />
                <div className="DashboardDetails">
                   <Sessions useParamID={id} />
-                  {/* <Performances useParamID={id} /> */}
+                  <Performances useParamID={id} />
                   {/* <Score useParamID={id} /> */}
                </div>
             </div>
