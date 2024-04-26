@@ -4,14 +4,21 @@ import { useEffect, useState } from "react";
 
 function Welcome({ useParamID }) {
    const [userDataFetched, setUserDataFetched] = useState(null);
+   const [canRunFunction, setCanRunFunction] = useState(true);
 
    useEffect(() => {
-      (async () => {
-         const userData = await getMainData(useParamID);
-         setUserDataFetched(userData.userInfos.firstName);
-      })();
+      // Function Async fetchData() récupère les données :
+      async function fetchData() {
+         const reponse = await getMainData(useParamID);
+         setUserDataFetched(reponse.userInfos.firstName);
+      }
+      // Break Infinite Loop :
+      if (canRunFunction) {
+         setCanRunFunction(!canRunFunction);
+         fetchData();
+      }
    }),
-      [];
+      [useParamID];
 
    return (
       <div className="WelcomeWrapper">

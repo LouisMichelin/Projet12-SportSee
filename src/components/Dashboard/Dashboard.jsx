@@ -14,7 +14,7 @@ function Dashboard() {
       <div className="DashboardWrapper">
          <Welcome useParamID={id} />
          <div className="DashboardSecondWrapper">
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className="DashboardGraphics">
                <Daily useParamID={id} />
                <div className="DashboardDetails">
                   <Sessions useParamID={id} />

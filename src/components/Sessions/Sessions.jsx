@@ -37,7 +37,8 @@ function Sessions({ useParamID }) {
          setCanRunFunction(!canRunFunction);
          fetchData();
       }
-   });
+   }),
+      [useParamID];
 
    // CUSTOMIZED TOOLTIP
    const CustomTooltip = ({ active, payload }) => {

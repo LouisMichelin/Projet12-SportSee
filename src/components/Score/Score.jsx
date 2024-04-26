@@ -39,7 +39,8 @@ function Score({ useParamID }) {
          setCanRunFunction(!canRunFunction);
          fetchData();
       }
-   });
+   }),
+      [useParamID];
 
    const RenderCustomizedLegend = () => {
       return (

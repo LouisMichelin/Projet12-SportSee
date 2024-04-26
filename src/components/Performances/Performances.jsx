@@ -35,7 +35,8 @@ function Performances({ useParamID }) {
          setCanRunFunction(!canRunFunction);
          fetchData();
       }
-   });
+   }),
+      [useParamID];
 
    // Couleur des Labels + Majuscules
    function customTick({ payload, x, y, textAnchor, stroke, radius }) {
@@ -68,7 +69,7 @@ function Performances({ useParamID }) {
                cx="50%"
                cy="50%"
                outerRadius="70%"
-               data={userDataFetched}
+               data={userDataFetched.reverse()}
             >
                <PolarGrid radialLines={false} />
                <PolarAngleAxis

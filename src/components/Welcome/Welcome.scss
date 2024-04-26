@@ -1,8 +1,7 @@
 .WelcomeWrapper {
-   // height: 90px;
+   width: calc(100% - 25px);
    margin-bottom: 75px;
 }
-
 .WelcomeMessage {
    font-weight: 600;
    font-size: 48px;
@@ -11,7 +10,6 @@
    margin-top: 40px;
    font-size: 18px;
 }
-
 #WelcomeName {
    color: #ff0101;
 }

@@ -57,7 +57,8 @@ function Scientifics({ useParamID, imageSrc, imageAlt, category }) {
          setCanRunFunction(!canRunFunction);
          fetchData();
       }
-   });
+   }),
+      [useParamID];
 
    return (
       <div className="ScientificWrapper">
