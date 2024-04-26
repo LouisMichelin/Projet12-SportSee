@@ -1,16 +1,18 @@
 .DashboardWrapper {
    width: 100%;
-   // height: auto;
    background-color: #ffffff;
-   margin: 30px;
+   margin-top: 30px;
+   margin-left: 30px;
    display: flex;
    flex-direction: column;
    align-items: center;
-   // @media (min-width: 1024px) {
-   //    margin: 20px;
-   // }
+   position: relative;
+   @media (min-width: 1400px) {
+      margin-top: 60px;
+      margin-left: 105px;
+      margin-bottom: 85px;
+   }
 }
-
 .DashboardDetails {
    display: flex;
    flex-direction: row;
@@ -18,31 +20,26 @@
    justify-content: space-between;
    width: 835px;
 }
-
 .DashboardSecondWrapper {
    width: calc(100% - 25px);
    display: flex;
    flex-direction: column;
-   @media (min-width: 1400px) {
+   @media (min-width: 1250px) {
       flex-direction: row;
    }
 }
-
-.DashboardGraphics {
-   display: "flex";
-   flex-direction: "column";
-}
-
 .DashboardScientificValues {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    width: 835px;
    margin-top: 30px;
-   @media (min-width: 1400px) {
+   margin-bottom: 20px;
+   @media (min-width: 1250px) {
       flex-direction: column;
       margin-left: 30px;
       width: auto;
       margin-top: 0;
+      margin-bottom: 0;
    }
 }

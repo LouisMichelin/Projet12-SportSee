@@ -1,13 +1,12 @@
 .ScientificWrapper {
-   width: 175px;
-   height: 100px;
+   width: 185px;
+   height: 125px;
    background-color: #fbfbfb;
    display: flex;
    align-items: center;
    justify-content: space-evenly;
-   @media (min-width: 1400px) {
+   @media (min-width: 1325px) {
       width: 260px;
-      height: 125px;
    }
 }
 .ScientificWrapper img {
@@ -15,31 +14,21 @@
    justify-content: center;
    width: 60px;
    height: 60px;
-   // @media (min-width: 1400px) {
-   //    width: 60px;
-   //    height: 60px;
-   // }
 }
 
 .ScientificTitleWrapper {
-   // @media (min-width: 1400px) {
    max-width: 125px;
-   // }
+   @media (min-width: 1325px) {
+      width: 125px;
+   }
 }
-
 .ScientificTitle {
    font-weight: 700;
    font-size: 20px;
    margin-bottom: 10px;
-   // @media (min-width: 1400px) {
-   //    font-size: 20px;
-   // }
 }
 .ScientificDescription {
    color: #74798c;
    font-size: 14px;
    font-weight: 600;
-   // @media (min-width: 1400px) {
-   //    font-size: 14px;
-   // }
 }
